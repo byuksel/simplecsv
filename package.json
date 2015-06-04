@@ -1,14 +1,16 @@
 {
-  "name": "simplecsvjs",
+  "name": "simplecsv",
   "version": "0.0.1",
-  "description": "A simple csv parser and library in Javascript.",
+  "description": "A simple csv parser JS and library in Javascript.",
   "keywords": [
     "csv",
     "csvparser",
     "csv parser",
     "simple csv",
     "simple csv js",
-    "simple csv parser js"
+    "simple csv javascript",
+    "simple csv parser js",
+    "simple csv parser javascript"
   ],
   "homepage": "http://simplecsv.com",
   "author": {
