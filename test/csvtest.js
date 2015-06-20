@@ -28,9 +28,17 @@ describe('fish.csv browserified tests', function() {
       var myObj = testcases[i];
       var expected = expectedResults[myObj.testname];
       var toBeParsed = myObj.instances;
+      var argdic = {};
+      if (typeof myObj.hasComments !== 'undefined') {
+        argdic.hasComments = myObj.hasComments;
+      }
+      if (typeof myObj.delim !== 'undefined') {
+        argdic.delim = myObj.delim;
+      }
       for (var k = 0; k < toBeParsed.length; k++) {
-        var output = csv.parseString(toBeParsed[k]);
+        var output = csv.parseString(toBeParsed[k], argdic);
         var msg = 'Testname(' + myObj.testname + ') ' +
+              ' ArgDic(' + JSON.stringify(argdic) + ') ' +
               ' Instance(' + JSON.stringify(toBeParsed[k]) + ') ' +
               ' Real_Output( ' + JSON.stringify(output) + ') ' +
               ' Expected( ' + JSON.stringify(expected[k]) + ') ';

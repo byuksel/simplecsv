@@ -20,6 +20,7 @@
     },
     {
       "testname": "3.should parse # as comment line",
+      "hasComments": true,
       "instances": [
         "# This is a comment, you should not see this\n#\"This is also a comment",
         "This, is, not, a, comment,\n  # This is not a comment, even though it has #,\n"
@@ -33,10 +34,19 @@
     },
     {
       "testname": "5.should parse \" correctly",
+      "delim": ",",
       "instances": [
         "FirstName,LastName,Title,ReportsTo.Email,Birthdate,Description",
         "Tom,Jones,Senior Director,buyer@salesforcesample.com,1940-06-07Z,\"Self-described as \"\"the top\"\" branding guru on the West Coast\"",
         "Ian,Dury,Chief Imagineer,cto@salesforcesample.com,,\"World-renowned expert in fuzzy logic design.\nInfluential in technology purchases.\""
+      ]
+    },
+    {
+      "testname": "6.can work with delim param",
+      "delim": ".",
+      "instances": [
+        "\n\n\n\n\n\n\n",
+        "..\n.."
       ]
     }
   ]

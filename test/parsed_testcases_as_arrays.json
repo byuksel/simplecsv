@@ -93,15 +93,7 @@
     }, 
     {
       "instances": [
-        [
-          [
-            "# This is a comment", 
-            " you should not see this"
-          ], 
-          [
-            "#\"This is also a comment"
-          ]
-        ], 
+        [], 
         [
           [
             "This", 
@@ -168,6 +160,32 @@
         ]
       ], 
       "testname": "5.should parse \" correctly"
+    }, 
+    {
+      "instances": [
+        [
+          [], 
+          [], 
+          [], 
+          [], 
+          [], 
+          [], 
+          []
+        ], 
+        [
+          [
+            "", 
+            "", 
+            ""
+          ], 
+          [
+            "", 
+            "", 
+            ""
+          ]
+        ]
+      ], 
+      "testname": "6.can work with delim param"
     }
   ]
 }

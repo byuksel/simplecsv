@@ -13,22 +13,31 @@ def main():
     ' unittests of SimpleCSV.js.')
   parser.add_argument('--infile', '-i',
                       default='testcases_as_csv.json', 
-                      help='Input JSON file')
+                      help='Input JSON file. default:testcases_as_csv.json')
   parser.add_argument('--outfile', '-o',
                       default='parsed_testcases_as_arrays.json', 
-                      help='Output JSON file')
+                      help='Output JSON file. default:parsed_testcases_as_arrays.json')
   args = parser.parse_args()
   with open(args.infile, 'r') as infile, open(args.outfile, 'w') as outfile:
     indata = json.load(infile)
     outTestcases = []
     for inTest in indata['testcases']:
       outInstances = []
+      # Let's see if we have a delim char set in JSON
+      delimChar = ','
+      if inTest.has_key('delim'):
+        delimChar = str(inTest['delim'])
+      # Let's see if we have a hasComments field set in JSON
+      hasComments = False
+      if inTest.has_key('hasComments'):
+        hasComments = inTest['hasComments']
       for inInstance in inTest['instances']:
         # Parse each instance into rows
         # and stuff them into an array
-        reader = csv.reader(StringIO.StringIO(inInstance), delimiter=',')
+        reader = csv.reader(StringIO.StringIO(inInstance), delimiter=delimChar)
         rows = []
         for row in reader:
+          if hasComments and row[0].startswith('#'): continue
           rows.append(row)
         outInstances.append(rows)
       outParsed = {}
