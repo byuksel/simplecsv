@@ -1,7 +1,9 @@
 /*jshint expr: true*/
 var simplecsv = require('../simplecsv'),
     csvdata = simplecsv.csvdata,
-    csv = simplecsv.csv;
+    csv = simplecsv.csv,
+    inputtestJSON = require('./testcases_as_csv.json'),
+    parsedtestJSON = require('./parsed_testcases_as_arrays.json');
 
 var chai = require('chai');
 var expect = chai.expect;
@@ -12,7 +14,33 @@ chai.use(sinonChai);
 var csv = new csv();
 describe('fish.csv browserified tests', function() {
 
+  it('Should pass test.csv', function() {
+    // Read the expected values from parsedtestJSON
+    var expectedResults = {};
+    var parsedcases = parsedtestJSON.parsedcases;
+    for (var j = 0; j < parsedcases.length; j++) {
+      var testObj = parsedcases[j];
+      expectedResults[testObj.testname] = testObj.instances;
+    }
+
+    var testcases = inputtestJSON.testcases;
+    for (var i = 0; i < testcases.length; i++) {
+      var myObj = testcases[i];
+      var expected = expectedResults[myObj.testname];
+      var toBeParsed = myObj.instances;
+      for (var k = 0; k < toBeParsed.length; k++) {
+        var output = csv.parseString(toBeParsed[k]);
+        var msg = 'Testname(' + myObj.testname + ') ' +
+              ' Instance(' + JSON.stringify(toBeParsed[k]) + ') ' +
+              ' Real_Output( ' + JSON.stringify(output) + ') ' +
+              ' Expected( ' + JSON.stringify(expected[k]) + ') ';
+        expect(output).to.eql(expected[k], msg);
+      }
+    }
+  });
+     
   it('should parse \\n at the end correctly', function() {
+    
     var toBeParsed = [
       'yoga,\ntramendous,',
       'yoga,\ntramendous,\n', 
@@ -52,12 +80,13 @@ describe('fish.csv browserified tests', function() {
 
   it('should parse # as comment line', function() {
     var toBeParsed = [
-      '# This is a comment\n#"This is also a comment',
-      'This, is, not, a, comment,\n  # but this is a comment, even though it has ,\n',
+      '# This is a comment, you should not see this\n#"This is also a comment',
+      'This, is, not, a, comment,\n  # This is not a comment, even though it has #,\n',
     ];
     var expected = [
       [ ],
-      [ [ '', '', '' ], [ '', '', '' ] ],
+      [ [ 'This', ' is', ' not', ' a', ' comment','' ],
+        [ ' # This is not a comment', 'even though it has #', '' ] ],
     ];
     var argdic = { 'hasComments': true };
     for (var i = 0; i < toBeParsed.length; i++) {
@@ -121,7 +150,4 @@ describe('fish.csv browserified tests', function() {
         expected[i]);
     }
   });
-
-
-  
 });

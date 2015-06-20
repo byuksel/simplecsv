@@ -1,0 +1,173 @@
+{
+  "parsedcases": [
+    {
+      "instances": [
+        [
+          [
+            "yoga", 
+            ""
+          ], 
+          [
+            "tramendous", 
+            ""
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            ""
+          ], 
+          [
+            "tramendous", 
+            ""
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            ""
+          ], 
+          [
+            "tramendous", 
+            "\n"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            ""
+          ], 
+          [
+            "tramendous", 
+            "yoga\n"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            ""
+          ], 
+          [
+            "tramendous", 
+            "\n"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            ""
+          ], 
+          [
+            "tramendous", 
+            "\n"
+          ]
+        ]
+      ], 
+      "testname": "1.should parse \\n at the end correctly"
+    }, 
+    {
+      "instances": [
+        [
+          [], 
+          [], 
+          [], 
+          [], 
+          [], 
+          [], 
+          []
+        ], 
+        [
+          [
+            "", 
+            "", 
+            ""
+          ], 
+          [
+            "", 
+            "", 
+            ""
+          ]
+        ]
+      ], 
+      "testname": "2.should parse \\n and , as terminators"
+    }, 
+    {
+      "instances": [
+        [
+          [
+            "# This is a comment", 
+            " you should not see this"
+          ], 
+          [
+            "#\"This is also a comment"
+          ]
+        ], 
+        [
+          [
+            "This", 
+            " is", 
+            " not", 
+            " a", 
+            " comment", 
+            ""
+          ], 
+          [
+            "  # This is not a comment", 
+            " even though it has #", 
+            ""
+          ]
+        ]
+      ], 
+      "testname": "3.should parse # as comment line"
+    }, 
+    {
+      "instances": [
+        [
+          [
+            "yoga\\'s", 
+            "yoga\"s", 
+            "\",\"", 
+            "314", 
+            "\""
+          ]
+        ]
+      ], 
+      "testname": "4.should parse \" correctly"
+    }, 
+    {
+      "instances": [
+        [
+          [
+            "FirstName", 
+            "LastName", 
+            "Title", 
+            "ReportsTo.Email", 
+            "Birthdate", 
+            "Description"
+          ]
+        ], 
+        [
+          [
+            "Tom", 
+            "Jones", 
+            "Senior Director", 
+            "buyer@salesforcesample.com", 
+            "1940-06-07Z", 
+            "Self-described as \"the top\" branding guru on the West Coast"
+          ]
+        ], 
+        [
+          [
+            "Ian", 
+            "Dury", 
+            "Chief Imagineer", 
+            "cto@salesforcesample.com", 
+            "", 
+            "World-renowned expert in fuzzy logic design.\nInfluential in technology purchases."
+          ]
+        ]
+      ], 
+      "testname": "5.should parse \" correctly"
+    }
+  ]
+}
