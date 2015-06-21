@@ -36,7 +36,7 @@ describe('fish.csv browserified tests', function() {
         argdic.delim = myObj.delim;
       }
       for (var k = 0; k < toBeParsed.length; k++) {
-        var output = csv.parseString(toBeParsed[k], argdic);
+        var output = csv.parseStringToArray(toBeParsed[k], argdic);
         var msg = 'Testname(' + myObj.testname + ') ' +
               ' argdic(' + JSON.stringify(argdic) + ') ' +
               ' index(' + k + ') ' +

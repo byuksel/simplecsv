@@ -7,6 +7,15 @@ module.exports = function(grunt) {
   
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),  // Parse package.json info
+    env: {
+      test: {
+        NODE_TEST: 'test',
+      },
+      dist: {
+        NODE_TEST: null,
+      }
+
+    },
     // jshint all the src files.
     jshint: {
       options: {
@@ -95,7 +104,8 @@ module.exports = function(grunt) {
       }
     }
   });
-  
+
+  grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-browserify');
@@ -103,8 +113,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.registerTask('default', ['jshint', 'mochaTest', 'clean', 'browserify', 'connect:server', 'mocha_phantomjs', 'uglify']);
-  grunt.registerTask('test', ['clean', 'jshint', 'mochaTest', 'browserify', 'connect:server', 'mocha_phantomjs']);
+  grunt.registerTask('dist', ['env:dist', 'clean', 'browserify', 'uglify']);
+  grunt.registerTask('default', ['test', 'dist']);
+  grunt.registerTask('test', ['env:test', 'clean', 'jshint', 'mochaTest', 'browserify', 'connect:server', 'mocha_phantomjs']);
 };
 
 
