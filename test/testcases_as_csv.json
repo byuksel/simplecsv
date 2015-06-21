@@ -15,7 +15,10 @@
       "testname": "2.should parse \\n and , as terminators",
       "instances": [
         "\n\n\n\n\n\n\n",
-        ",,\n,,"
+        ",,\n,,",
+        "",
+        "\n",
+        ","
       ]
     },
     {

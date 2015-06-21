@@ -87,6 +87,16 @@
             "", 
             ""
           ]
+        ], 
+        [], 
+        [
+          []
+        ], 
+        [
+          [
+            "", 
+            ""
+          ]
         ]
       ], 
       "testname": "2.should parse \\n and , as terminators"
