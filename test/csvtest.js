@@ -14,8 +14,19 @@ chai.use(sinonChai);
 var csv = new csv();
 describe('SimpleCsv.js Unit Test', function() {
 
+  it('(findErrors) should find errors', function() {
+    var test  = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
+                                         rows : [ [ 3, '4' ], [ '5' ] ],
+                                         rowCount : 10 ,
+                                         columnCount: 22 });
+    var actualOutput = csv.findErrors(test); 
+    var expectedOutput = [ 'Type mismatch at 1:0 expected:number actual:string',
+                           'columnCount is 22 but Row 0 has 2',
+                           'Row 1 has 1 columns, but Row 0 has 2' ];
+    expect(actualOutput).eql(expectedOutput);
+  });
+  
   it('(getArg) should work', function() {
-    // Create a stub for csv.parseStringToArray
     var argdic = { hasHeaders: true , movement: 'yes' };
     expect(csv.getArg(argdic, 'hasHeaders', false)).to.be.true;
     expect(csv.getArg(argdic, 'myflag', false)).to.be.false;
