@@ -4,6 +4,7 @@ node_modules
 **/*~
 # Ignore Emacs auto rescue files
 **/#*#
+**/.#*
 # Ignore browserify output
 browser/dist/**/*
 browser/test/browserified_tests.js
