@@ -14,18 +14,30 @@ chai.use(sinonChai);
 var csv = new csv();
 describe('SimpleCsv.js Unit Test', function() {
 
+  it('(csvdataToJson) should return a true representation of csv in JSON', function(){
+    var test  = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
+                                         rows : [ [ '4', 0 ], [ '5', 0 ] ],
+                                         rowCount : 2 ,
+                                         columnCount: 2 });
+    var actualOutput = csv.csvdataToJSON(test);
+    var expectedOutput = '[{"1":"4","2":0},{"1":"5","2":0}]';
+    expect(actualOutput).eql(expectedOutput);
+
+  });
+
   it('(findErrors) should find errors', function() {
     var test  = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
                                          rows : [ [ 3, '4' ], [ '5' ] ],
                                          rowCount : 10 ,
                                          columnCount: 22 });
-    var actualOutput = csv.findErrors(test); 
-    var expectedOutput = [ 'Type mismatch at 1:0 expected:number actual:string',
-                           'columnCount is 22 but Row 0 has 2',
-                           'Row 1 has 1 columns, but Row 0 has 2' ];
+    var actualOutput = csv.findErrors(test);
+    var expectedOutput = [
+      "Type mismatch at row:1 col:0 expected:number actual:string",
+      "Column count is 22 but Row 0 has 2 cols",
+      "Row 1 has 1 cols, Row 0 has 2"];
     expect(actualOutput).eql(expectedOutput);
   });
-  
+
   it('(getArg) should work', function() {
     var argdic = { hasHeaders: true , movement: 'yes' };
     expect(csv.getArg(argdic, 'hasHeaders', false)).to.be.true;
@@ -33,7 +45,7 @@ describe('SimpleCsv.js Unit Test', function() {
     expect(csv.getArg(argdic, 'movement', 'no')).equal('yes');
     expect(csv.getArg(argdic, 'movement', 1)).equal(1);
   });
-  
+
   it('(parseString) should handle hasHeaders correctly', sinon.test(function() {
     // Create a stub for csv.parseStringToArray
     var mystub = this.stub(csv, 'parseStringToArray').returns([['1', '2'], ['3', '4']]);
