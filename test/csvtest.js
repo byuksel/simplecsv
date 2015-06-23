@@ -14,7 +14,7 @@ chai.use(sinonChai);
 var csv = new csv();
 describe('SimpleCsv.js Unit Test', function() {
 
-  it('(csvdataToJson) should return a true representation of csv in JSON', function(){
+  it('(csvdataToJSON and JSONToCsvdata) should return a true representation of csv in JSON', function(){
     var test  = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
                                          rows : [ [ '4', 0 ], [ '5', 0 ] ],
                                          rowCount : 2 ,
@@ -22,7 +22,8 @@ describe('SimpleCsv.js Unit Test', function() {
     var actualOutput = csv.csvdataToJSON(test);
     var expectedOutput = '[{"1":"4","2":0},{"1":"5","2":0}]';
     expect(actualOutput).eql(expectedOutput);
-
+    var actualConvertedCsvdata = csv.JSONToCsvdata(actualOutput);
+    expect(actualConvertedCsvdata).eql(test);
   });
 
   it('(findErrors) should find errors', function() {
