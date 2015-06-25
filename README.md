@@ -1,8 +1,35 @@
 # simplecsv
-Simple CSV . JS
+SimpleCSV.js is a compact csv parser library for reading csv files and JSON csv/table objects. 
+
+
+For the browser:
+
+~~~
+
+
+~~~
+
+For node.js:
+
+~~~
+var simplecsv = require('simplecsv');
+var csv = new simplecsv.csv();
+
+var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
+~~~
+
+which you can run on your browser or node.js, making csv parsing simple. 
 
 
 ----
+
+# Install #
+
+Install with [npm](https://www.npmjs.com/).
+
+~~~
+$ npm install simplecsv
+~~~
 
 
 # Contributing to the project
@@ -16,7 +43,7 @@ In order to develop SimpleCSV.js, you need to install [Node.js](https://nodejs.o
 In order install all the dev dependecies (i.e. all the packages you need to develop)
 
 ~~~
-npm install --dev
+$ npm install --dev
 ~~~
 
 ## Building SimpleCSV.js
@@ -24,14 +51,23 @@ npm install --dev
 We use [Grunt.js](http://gruntjs.com/) for building the package and managing test jobs. The default task will lint, build, unit test, browserify, browser unittest, and produce the uglified code. Just run:
 
 ~~~
-grunt
+$ grunt
 ~~~
 
-If you only want to unit test, and browser unit test, you can use:
+If you only want to test the library, you can run the mocha unittests and browserify'ied 
 
 ~~~
-grunt test
+$ grunt test
 ~~~
+
+This calls 
+You can run mocha unittests without the browser tests with:
+
+~~~
+$ grunt localtest
+~~~
+
+And finally, you can run the unittests for *browserify*'ied library with:
 
 This will do everything the default command does sans uglify. 
 
@@ -45,6 +81,9 @@ The parser is exhaustively tested against the output of [Python CSV parser](http
 
 You can feed this file (`testcases_as_csv.json`) to the python program `parsetestcases.py` to produce `parsed_test_cases_as_arrays.json`. **Beware:** the names of the test cases should be unique.
 
+## Kudos ##
+
+While implementing non-exporting private methods and unittesting them, I used the methods suggested by Mark S.Everitt [in this presentation @ Async.](https://speakerdeck.com/qubyte/writing-testable-private-methods-with-node-dot-js-modules)
 
 
 

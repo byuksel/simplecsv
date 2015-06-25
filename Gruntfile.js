@@ -28,6 +28,19 @@ module.exports = function(grunt) {
                '!lib/garbage/**/*',]
       }
     },
+    // use blanket to get coverage stats on mocha tests
+    blanketMocha: {
+      test: {
+        src: [],
+      },        
+      options: {
+        // Task-specific options go here.
+        pattern: '',
+      },
+      your_target: {
+        // Target-specific file lists and/or options go here.
+      },
+    },
     // run the mocha tests via Node.js
     mochaTest: {
       test: {
@@ -98,8 +111,9 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
+          // Uglify browserified library
           'browser/dist/<%= pkg.name %>.standalone.min.js':
-          ['<%= browserify.standalone.dest %>'],
+          ['<%= browserify.standalone.dest %>']
         }
       }
     }

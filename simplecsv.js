@@ -1,7 +1,8 @@
-
 /**
- * Export lib/index
+ * Export all sub-modules
  *
  */
-
-module.exports = require('./lib/index');
+exports = module.exports = {
+  csvdata : require ('./lib/csvdata.js'),
+  csv : require('./lib/csv.js')
+};

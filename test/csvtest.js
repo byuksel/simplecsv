@@ -2,6 +2,7 @@
 var simplecsv = require('../simplecsv'),
     csvdata = simplecsv.csvdata,
     csv = simplecsv.csv,
+    private = require('../lib/private'),
     inputtestJSON = require('./testcases_as_csv.json'),
     parsedtestJSON = require('./parsed_testcases_as_arrays.json');
 
@@ -12,6 +13,8 @@ var sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 
 var csv = new csv();
+var private = new private();
+
 describe('SimpleCsv.js Unit Test', function() {
 
   it('(csvdataToJSON and JSONToCsvdata) should return a true representation of csv in JSON', function(){
@@ -30,7 +33,7 @@ describe('SimpleCsv.js Unit Test', function() {
     var test  = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
                                          rows : [ [ 3, '4' ], [ '5' ] ],
                                          rowCount : 10 ,
-                                         columnCount: 22 });
+                                         columnCount: 22});
     var actualOutput = csv.findErrors(test);
     var expectedOutput = [
       "Type mismatch at row:1 col:0 expected:number actual:string",
@@ -39,35 +42,32 @@ describe('SimpleCsv.js Unit Test', function() {
     expect(actualOutput).eql(expectedOutput);
   });
 
-  it('(getArg) should work', function() {
+  it('(private.getArg) should work', function() {
     var argdic = { hasHeaders: true , movement: 'yes' };
-    expect(csv.getArg(argdic, 'hasHeaders', false)).to.be.true;
-    expect(csv.getArg(argdic, 'myflag', false)).to.be.false;
-    expect(csv.getArg(argdic, 'movement', 'no')).equal('yes');
-    expect(csv.getArg(argdic, 'movement', 1)).equal(1);
+    expect(private.getArg(argdic, 'hasHeaders', false)).to.be.true;
+    expect(private.getArg(argdic, 'myflag', false)).to.be.false;
+    expect(private.getArg(argdic, 'movement', 'no')).equal('yes');
+    expect(private.getArg(argdic, 'movement', 1)).equal(1);
   });
 
-  it('(parseString) should handle hasHeaders correctly', sinon.test(function() {
-    // Create a stub for csv.parseStringToArray
-    var mystub = this.stub(csv, 'parseStringToArray').returns([['1', '2'], ['3', '4']]);
+  it('(parseString) should handle hasHeaders correctly', function() {
     var argdic = { hasHeaders: true };
-    var realOutput = csv.parseString('', argdic);
+    var realOutput = csv.parseString('1,2\n3,4\n', argdic);
     var expectedOutput = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
                                                   rows : [ [ '3', '4' ] ],
                                                   rowCount : 1 ,
                                                   columnCount: 2 });
     expect(realOutput).to.eql(expectedOutput);
-
-    mystub.returns([['1', '2'], ['3', '4']]);
+    
     argdic = { hasHeaders: false };
-    realOutput = csv.parseString('', argdic);
+    realOutput = csv.parseString('1,2\n3,4\n', argdic);
     expectedOutput = csv.makeCsvdataFromObj({ rows : [ [ '1', '2' ], [ '3', '4' ] ],
                                               rowCount : 2 ,
                                               columnCount: 2 });
     expect(realOutput).to.eql(expectedOutput);
-   }));
+  }); 
 
-  it('(parseStringToArray) should parse csv cases in testcases_as_csv.json', function() {
+  it('(private.parseStringToArray) should parse csv cases in testcases_as_csv.json', function() {
     // Read the expected values from parsedtestJSON
     var expectedResults = {};
     var parsedcases = parsedtestJSON.parsedcases;
@@ -89,7 +89,7 @@ describe('SimpleCsv.js Unit Test', function() {
         argdic.delim = myObj.delim;
       }
       for (var k = 0; k < toBeParsed.length; k++) {
-        var output = csv.parseStringToArray(toBeParsed[k], argdic);
+        var output = private.parseStringToArray(toBeParsed[k], argdic);
         var msg = 'Testname(' + myObj.testname + ') ' +
               ' argdic(' + JSON.stringify(argdic) + ') ' +
               ' index(' + k + ') ' +
