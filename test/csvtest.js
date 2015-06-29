@@ -29,6 +29,17 @@ describe('SimpleCsv.js Unit Test', function() {
     expect(actualConvertedCsvdata).eql(test);
   });
 
+  it('(csvdataToJSON) should generate zero padded column names when no column names', function(){
+    var test  = csv.makeCsvdataFromObj({ rows : [ [ '4', 0 ], [ '5', 0 ] ],
+                                         rowCount : 2 ,
+                                         columnCount: 2 });
+    var actualOutput = csv.csvdataToJSON(test);
+    var expectedOutput = '[{"Col 0":"4","Col 1":0},{"Col 0":"5","Col 1":0}]';
+    expect(actualOutput).eql(expectedOutput);
+    var actualConvertedCsvdata = csv.JSONToCsvdata(actualOutput);
+    expect(actualConvertedCsvdata).eql(test);
+  });
+
   it('(findErrors) should find errors', function() {
     var test  = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
                                          rows : [ [ 3, '4' ], [ '5' ] ],

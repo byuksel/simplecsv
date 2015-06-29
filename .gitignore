@@ -9,3 +9,4 @@ node_modules
 browser/dist/**/*
 browser/test/browserified_tests.js
 test/output/*
+examples/**/*

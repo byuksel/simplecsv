@@ -2,6 +2,8 @@
 SimpleCSV.js is a compact csv parser library for reading csv files and JSON csv/table objects. 
 
 
+# Examples #
+
 ## Browser ##
 
 In any html file:
@@ -26,6 +28,8 @@ var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
 
 
 ----
+
+# Quick Start #
 
 # Install #
 
