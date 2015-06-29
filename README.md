@@ -1,10 +1,10 @@
-# simplecsv
+# SimpleCSV.js
+
 SimpleCSV.js is a compact csv parser library for reading csv files and JSON csv/table objects. 
 
+## Examples ##
 
-# Examples #
-
-## Browser ##
+### Browser ###
 
 In any html file:
 ~~~
@@ -17,7 +17,7 @@ In any html file:
 </script>
 ~~~
 
-## Node.js ##
+### Node.js ###
 
 ~~~
 var simplecsv = require('simplecsv');
