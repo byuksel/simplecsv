@@ -2,14 +2,20 @@
 SimpleCSV.js is a compact csv parser library for reading csv files and JSON csv/table objects. 
 
 
-For the browser:
+## Browser ##
 
+In any html file:
+~~~
+<script src="http://simplecsvjs.com/dist/simplecsv.standalone.min.js"></script>
+<script>
+  var simplecsv = require('simplecsv');
+  var csv = new simplecsv.csv();
+
+  var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
+</script>
 ~~~
 
-
-~~~
-
-For node.js:
+## Node.js ##
 
 ~~~
 var simplecsv = require('simplecsv');
@@ -17,8 +23,6 @@ var csv = new simplecsv.csv();
 
 var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
 ~~~
-
-which you can run on your browser or node.js, making csv parsing simple. 
 
 
 ----
@@ -83,8 +87,7 @@ You can feed this file (`testcases_as_csv.json`) to the python program `parsetes
 
 ## Kudos ##
 
-While implementing non-exporting private methods and unittesting them, I used the methods suggested by Mark S.Everitt [in this presentation @ Async.](https://speakerdeck.com/qubyte/writing-testable-private-methods-with-node-dot-js-modules)
-
+While implementing non-exporting private methods and unittesting them, I used the methods suggested by Mark S.Everitt [in this presentation @ Async.](https://speakerdeck.com/qubyte/writing-testable-private-methods-with-node-dot-js-modules). 
 
 
 

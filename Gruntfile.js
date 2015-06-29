@@ -29,18 +29,16 @@ module.exports = function(grunt) {
       }
     },
     // use blanket to get coverage stats on mocha tests
-    blanketMocha: {
-      test: {
-        src: [],
-      },        
+    mocha_cov: {
       options: {
-        // Task-specific options go here.
-        pattern: '',
+        instrument: false,
+        coveralls: true,
+        reporter: 'spec',
+        require: ['should']
       },
-      your_target: {
-        // Target-specific file lists and/or options go here.
-      },
+      all: ['test/**/*.js']
     },
+
     // run the mocha tests via Node.js
     mochaTest: {
       test: {
@@ -65,14 +63,10 @@ module.exports = function(grunt) {
         src: [ 'simplecsv.js' ],
         dest: './browser/dist/<%= pkg.name %>.standalone.js',
         options: {
-            standalone: '<%= pkg.name %>'
-        }
-      },
-      require: {
-        src: [ 'simplecsv.js' ],
-        dest: './browser/dist/<%= pkg.name %>.require.js',
-        options: {
-          alias: [ './simplecsv.js:' ]
+          standalone: '<%= pkg.name %>',
+          alias: {
+            'simplecsv': './<%= pkg.name %>.js'
+          }
         }
       },
       tests: {
@@ -127,6 +121,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.registerTask('test2', ['mocha_cov']);
   grunt.registerTask('dist', ['env:dist', 'clean', 'browserify', 'uglify']);
   grunt.registerTask('localtest', ['env:test', 'clean', 'jshint', 'mochaTest']);
   grunt.registerTask('browsertest', ['env:test', 'clean', 'jshint', 'browserify', 'connect:server', 'mocha_phantomjs']);
