@@ -301,7 +301,7 @@ function parseStringToArray(str, argdic) {
 
 private.prototype.parseStringToArray = parseStringToArray;
 
-},{}],"deniz":[function(require,module,exports){
+},{}],"<%= pkg.name %>":[function(require,module,exports){
 /**
  * Export all sub-modules
  *
@@ -311,4 +311,4 @@ exports = module.exports = {
   csv : require('./lib/csv.js')
 };
 
-},{"./lib/csv.js":1,"./lib/csvdata.js":2}]},{},["deniz"]);
+},{"./lib/csv.js":1,"./lib/csvdata.js":2}]},{},["<%= pkg.name %>"]);
