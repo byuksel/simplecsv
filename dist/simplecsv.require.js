@@ -301,7 +301,7 @@ function parseStringToArray(str, argdic) {
 
 private.prototype.parseStringToArray = parseStringToArray;
 
-},{}],"/Users/barisyuksel/data/demos/simplecsv/simplecsv.js":[function(require,module,exports){
+},{}],"deniz":[function(require,module,exports){
 /**
  * Export all sub-modules
  *
@@ -311,4 +311,4 @@ exports = module.exports = {
   csv : require('./lib/csv.js')
 };
 
-},{"./lib/csv.js":1,"./lib/csvdata.js":2}]},{},["/Users/barisyuksel/data/demos/simplecsv/simplecsv.js"]);
+},{"./lib/csv.js":1,"./lib/csvdata.js":2}]},{},["deniz"]);
