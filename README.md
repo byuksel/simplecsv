@@ -1,13 +1,15 @@
 # SimpleCSV.js
 
-SimpleCSV.js is a compact csv parser library for reading csv files and JSON csv/table objects. 
+SimpleCSV.js is a compact csv parser for reading csv strings and JSON csv/table objects.
+
+
 
 ## Examples ##
 
 ### Browser ###
 
 In any html file:
-~~~
+```js
 <script src="http://simplecsvjs.com/dist/simplecsv.standalone.min.js"></script>
 <script>
   var simplecsv = require('simplecsv');
@@ -15,16 +17,16 @@ In any html file:
 
   var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
 </script>
-~~~
+```
 
 ### Node.js ###
 
-~~~
+```html
 var simplecsv = require('simplecsv');
 var csv = new simplecsv.csv();
 
 var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
-~~~
+```
 
 
 ----
