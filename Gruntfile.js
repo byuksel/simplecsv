@@ -61,7 +61,7 @@ module.exports = function(grunt) {
     browserify: {
       standalone: {
         src: [ 'simplecsv.js' ],
-        dest: './browser/dist/<%= pkg.name %>.standalone.js',
+        dest: './browser/dist/<%= pkg.name %>.<%= pkg.version %>.standalone.js',
         options: {
           standalone: '<%= pkg.name %>',
           alias: {
