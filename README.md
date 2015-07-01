@@ -4,10 +4,10 @@ SimpleCSV.js is a compact JavaScript csv library for parsing csv strings, and pa
 
 ## Features ##
 
-* **In-the-Browser, For-The-Browser:** Only 3 lines of code to parse csv strings. Has no dependancies other than a standalone JS file. 
-* **Python csv compatible:** Fully tested against Python 2.7's csv parser. Guaranteed to produce the same results. 
-* **JSON parser included:** Convert CSV data to JSON, and JSON data to CSV.
-* **No dependancies:** 
+* **In-the-Browser, For-The-Browser:** Only 3 lines of code to parse csv strings. 
+* **Python csv compatible:** Guaranteed to produce the same results as Python 2.7's csv parser. 
+* **JSON parser included:** Convert CSV -> JSON, or JSON -> CSV.
+* **No dependancies:** Has no dependancies other than a standalone JS file. 
 
 ## Examples ##
 
@@ -45,6 +45,10 @@ Install with [npm](https://www.npmjs.com/).
 ~~~
 $ npm install simplecsv
 ~~~
+
+
+
+
 
 
 # Contributing to the project
