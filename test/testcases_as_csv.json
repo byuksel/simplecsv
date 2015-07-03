@@ -3,12 +3,19 @@
     {
       "testname": "1.should parse \\n at the end correctly",
       "instances": [
-        "yoga,\ntramendous,",
         "yoga,\ntramendous,\n", 
         "yoga,\ntramendous,\"\n",
         "yoga,\ntramendous,\"yoga\n",
         "yoga,\ntramendous,\"\n\"",
-        "yoga,\ntramendous,\"\n\"\n"
+        "yoga,\ntramendous,\"\n\"\n",
+        "\"yoga\",\"\r\",yoga9",
+        "\"y\roga\",\"\r\",yoga9",
+        "yoga,\"\n\",yoga8",
+        "yoga,\"\r\n\",yoga7",
+        "yoga,\n,yoga2",
+        "yo  ga,\n,  yoga2",
+        "\"yo,ga\",\n,  yoga2"
+
       ]
     },
     {

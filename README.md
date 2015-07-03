@@ -7,13 +7,13 @@ SimpleCSV.js is a compact JavaScript csv library for parsing csv strings, and pa
 * **In-the-Browser, For-The-Browser:** Only 3 lines of code to parse csv strings. 
 * **Python csv compatible:** Guaranteed to produce the same results as Python 2.7's csv parser. 
 * **JSON parser included:** Convert CSV -> JSON, or JSON -> CSV.
-* **No dependancies:** Has no dependancies other than a standalone JS file. 
+* **No dependancies:** Small standalone .js file. 
 
 ## Examples ##
 
 ### Browser ###
 
-In any html file:
+In any web page:
 ```html
 <script src="http://simplecsvjs.com/dist/simplecsv.0.0.1.standalone.min.js"></script>
 <script>
@@ -33,10 +33,44 @@ var csv = new simplecsv.csv();
 var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
 ```
 
+## More Examples ##
 
-----
+
+### CSV string -> JSON ###
+
+```js
+var simplecsv = require('simplecsv');
+var csv = new simplecsv.csv();
+
+var planetCsv  = csv.parseString('Planet Name, Color\nMars,red-orange\nUranus,light-blue',
+                                 {hasHeaders: true});
+var str = csv.csvdataToJSON(planetCsv);
+
+console.log(str);
+```
+
+output is:
+```js
+[{"Planet Name":"Mars"," Color":"red-orange"},{"Planet Name":"Uranus"," Color":"light-blue"}]
+```
+
+### JSON -> CSV ###
+var simplecsv = require('simplecsv');
+var csv = new simplecsv.csv();
+
+var planetCsv  = csv.JSONToCsvdata('[{"Planet Name":"Mars"," Color":"red-orange"},'
+                                    '{"Planet Name":"Uranus"," Color":"light-blue"}]');
+
+var str = csv.(planetCsv);
+
+console.log(str);
+
 
 # Quick Start #
+
+# Newline #
+
+SimpleCSV.js uses `\n` and `\r\n` for newline when parsing. Currently there is no support for Mac's `\r` for newline (i.e. universal mode in Python csv). 
 
 # Install #
 

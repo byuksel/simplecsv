@@ -19,16 +19,6 @@
           ], 
           [
             "tramendous", 
-            ""
-          ]
-        ], 
-        [
-          [
-            "yoga", 
-            ""
-          ], 
-          [
-            "tramendous", 
             "\n"
           ]
         ], 
@@ -61,7 +51,79 @@
             "tramendous", 
             "\n"
           ]
+        ], 
+        [
+          [
+            "yoga", 
+            "\r", 
+            "yoga9"
+          ]
+        ], 
+        [
+          [
+            "y\roga", 
+            "\r", 
+            "yoga9"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            "\n", 
+            "yoga8"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            "\r\n", 
+            "yoga7"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            ""
+          ], 
+          [
+            "", 
+            "yoga2"
+          ]
+        ], 
+        [
+          [
+            "yo  ga", 
+            ""
+          ], 
+          [
+            "", 
+            "  yoga2"
+          ]
+        ], 
+        [
+          [
+            "yo,ga", 
+            ""
+          ], 
+          [
+            "", 
+            "  yoga2"
+          ]
         ]
+      ], 
+      "instancesAsString": [
+        "yoga,\r\ntramendous,\r\n", 
+        "yoga,\r\ntramendous,\"\n\"\r\n", 
+        "yoga,\r\ntramendous,\"yoga\n\"\r\n", 
+        "yoga,\r\ntramendous,\"\n\"\r\n", 
+        "yoga,\r\ntramendous,\"\n\"\r\n", 
+        "yoga,\"\r\",yoga9\r\n", 
+        "\"y\roga\",\"\r\",yoga9\r\n", 
+        "yoga,\"\n\",yoga8\r\n", 
+        "yoga,\"\r\n\",yoga7\r\n", 
+        "yoga,\r\n,yoga2\r\n", 
+        "yo  ga,\r\n,  yoga2\r\n", 
+        "\"yo,ga\",\r\n,  yoga2\r\n"
       ], 
       "testname": "1.should parse \\n at the end correctly"
     }, 
@@ -99,6 +161,13 @@
           ]
         ]
       ], 
+      "instancesAsString": [
+        "\r\n\r\n\r\n\r\n\r\n\r\n\r\n", 
+        ",,\r\n,,\r\n", 
+        "", 
+        "\r\n", 
+        ",\r\n"
+      ], 
       "testname": "2.should parse \\n and , as terminators"
     }, 
     {
@@ -120,6 +189,10 @@
           ]
         ]
       ], 
+      "instancesAsString": [
+        "", 
+        "This, is, not, a, comment,\r\n  # This is not a comment, even though it has #,\r\n"
+      ], 
       "testname": "3.should parse # as comment line"
     }, 
     {
@@ -133,6 +206,9 @@
             "\""
           ]
         ]
+      ], 
+      "instancesAsString": [
+        "yoga\\'s,\"yoga\"\"s\",\"\"\",\"\"\",314,\"\"\"\"\r\n"
       ], 
       "testname": "4.should parse \" correctly"
     }, 
@@ -169,6 +245,11 @@
           ]
         ]
       ], 
+      "instancesAsString": [
+        "FirstName,LastName,Title,ReportsTo.Email,Birthdate,Description\r\n", 
+        "Tom,Jones,Senior Director,buyer@salesforcesample.com,1940-06-07Z,\"Self-described as \"\"the top\"\" branding guru on the West Coast\"\r\n", 
+        "Ian,Dury,Chief Imagineer,cto@salesforcesample.com,,\"World-renowned expert in fuzzy logic design.\nInfluential in technology purchases.\"\r\n"
+      ], 
       "testname": "5.should parse \" correctly"
     }, 
     {
@@ -194,6 +275,10 @@
             ""
           ]
         ]
+      ], 
+      "instancesAsString": [
+        "\r\n\r\n\r\n\r\n\r\n\r\n\r\n", 
+        "..\r\n..\r\n"
       ], 
       "testname": "6.can work with delim param"
     }

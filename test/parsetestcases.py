@@ -23,6 +23,7 @@ def main():
     outTestcases = []
     for inTest in indata['testcases']:
       outInstances = []
+      outInstancesAsString = []
       # Let's see if we have a delim char set in JSON
       delimChar = ','
       if inTest.has_key('delim'):
@@ -34,16 +35,21 @@ def main():
       for inInstance in inTest['instances']:
         # Parse each instance into rows
         # and stuff them into an array
+        csvAsString = StringIO.StringIO()
+        writer = csv.writer(csvAsString, delimiter=delimChar)
         reader = csv.reader(StringIO.StringIO(inInstance), delimiter=delimChar)
         rows = []
         for row in reader:
           if hasComments and row[0].startswith('#'): continue
           rows.append(row)
+          writer.writerow(row)
         outInstances.append(rows)
+        outInstancesAsString.append(csvAsString.getvalue())
       outParsed = {}
       # Read the test
       outParsed['testname'] = inTest['testname']
       outParsed['instances'] = outInstances
+      outParsed['instancesAsString'] = outInstancesAsString 
       outTestcases.append(outParsed)
     outdata = { 'parsedcases': outTestcases }
     json.dump(outdata, outfile, indent=2)
