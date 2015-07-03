@@ -102,7 +102,7 @@
         ], 
         [
           [
-            "yo,ga", 
+            "yo  ga", 
             ""
           ], 
           [
@@ -123,7 +123,7 @@
         "yoga,\"\r\n\",yoga7\r\n", 
         "yoga,\r\n,yoga2\r\n", 
         "yo  ga,\r\n,  yoga2\r\n", 
-        "\"yo,ga\",\r\n,  yoga2\r\n"
+        "yo  ga,\r\n,  yoga2\r\n"
       ], 
       "testname": "1.should parse \\n at the end correctly"
     }, 
@@ -281,6 +281,131 @@
         "..\r\n..\r\n"
       ], 
       "testname": "6.can work with delim param"
+    }, 
+    {
+      "instances": [
+        [
+          [
+            "yo", 
+            ""
+          ], 
+          [
+            "tre", 
+            ""
+          ]
+        ], 
+        [
+          [
+            "yo", 
+            ""
+          ], 
+          [
+            "tre", 
+            ""
+          ]
+        ], 
+        [
+          [
+            "dous", 
+            "\r"
+          ]
+        ], 
+        [
+          [
+            "dous", 
+            "yoga\r\n"
+          ]
+        ], 
+        [
+          [
+            "dous", 
+            "\n\r"
+          ]
+        ], 
+        [
+          [
+            "dous", 
+            "\n\r\r"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            "\r\r\n", 
+            "yoga9"
+          ]
+        ], 
+        [
+          [
+            "y\roga", 
+            "\r", 
+            "yoga9"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            "\n", 
+            ""
+          ], 
+          [
+            "yoga8"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            "\r\n", 
+            "yoga7"
+          ]
+        ], 
+        [
+          [
+            "yoga", 
+            ""
+          ], 
+          [
+            "", 
+            "yoga2"
+          ]
+        ], 
+        [
+          [
+            "yo  ga", 
+            ""
+          ], 
+          [
+            "", 
+            "  yoga2"
+          ]
+        ], 
+        [
+          [
+            "yo  ga", 
+            ""
+          ], 
+          [
+            "", 
+            "  yoga2"
+          ]
+        ]
+      ], 
+      "instancesAsString": [
+        "yo,\r\ntre,\r\n", 
+        "yo,\r\ntre,\r\n", 
+        "dous,\"\r\"\r\n", 
+        "dous,\"yoga\r\n\"\r\n", 
+        "dous,\"\n\r\"\r\n", 
+        "dous,\"\n\r\r\"\r\n", 
+        "yoga,\"\r\r\n\",yoga9\r\n", 
+        "\"y\roga\",\"\r\",yoga9\r\n", 
+        "yoga,\"\n\",\r\nyoga8\r\n", 
+        "yoga,\"\r\n\",yoga7\r\n", 
+        "yoga,\r\n,yoga2\r\n", 
+        "yo  ga,\r\n,  yoga2\r\n", 
+        "yo  ga,\r\n,  yoga2\r\n"
+      ], 
+      "testname": "7.should parse \\r\\nn, \\r and \\n correctly"
     }
   ]
 }

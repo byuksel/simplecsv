@@ -14,8 +14,7 @@
         "yoga,\"\r\n\",yoga7",
         "yoga,\n,yoga2",
         "yo  ga,\n,  yoga2",
-        "\"yo,ga\",\n,  yoga2"
-
+        "\"yo  ga\",\n,  yoga2"
       ]
     },
     {
@@ -57,6 +56,24 @@
       "instances": [
         "\n\n\n\n\n\n\n",
         "..\n.."
+      ]
+    },
+    {
+      "testname": "7.should parse \\r\\nn, \\r and \\n correctly",
+      "instances": [
+        "yo,\ntre,\n",
+        "yo,\r\ntre,\n", 
+        "dous,\"\r",
+        "dous,\"yoga\r\n",
+        "dous,\"\n\r\"",
+        "dous,\"\n\r\r\"\n",
+        "\"yoga\",\"\r\r\n\",yoga9",
+        "\"y\roga\",\"\r\",yoga9",
+        "yoga,\"\n\",\nyoga8",
+        "yoga,\"\r\n\",yoga7",
+        "yoga,\n,yoga2",
+        "yo  ga,\n,  yoga2",
+        "\"yo  ga\",\n,  yoga2"
       ]
     }
   ]
