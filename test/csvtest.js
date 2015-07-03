@@ -63,6 +63,15 @@ describe('SimpleCsv.js Unit Test', function() {
     expect(private.getArg(argdic, 'movement', 1)).equal(1);
   });
 
+  it('(private.doubleQuoteIfNecessary) should respect Wikipedia guidelines', function() {
+    var input = [ '   ', ' \r \n ', ' " ', ' "" ', ' """ ', 'Asd feg', 'Yoga\r\n'];
+    var expectedOutput = [ '   ', '" \r \n "', '" "" "',
+                           '" """" "', '" """""" "', 'Asd feg', '"Yoga\r\n"'];
+    for (var i = 0; i < input.length; i++) {
+      expect(private.doubleQuoteIfNecessary(input[i])).to.be.equal(expectedOutput[i]);
+    }
+  });
+
   it('(parseString) should handle hasHeaders correctly', function() {
     var argdic = { hasHeaders: true };
     var realOutput = csv.parseString('1,2\n3,4\n', argdic);
