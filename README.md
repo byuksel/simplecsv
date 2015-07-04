@@ -43,7 +43,7 @@ var simplecsv = require('simplecsv');
 var csv = new simplecsv.csv();
 
 var planetCsv  = csv.parseString('Planet Name, Color\nMars,red-orange\nUranus,light-blue',
-                                 {hasHeaders: true});
+                                 { hasHeaders: true} );
 var str = csv.csvdataToJSON(planetCsv);
 
 console.log(str);
@@ -55,22 +55,50 @@ output is:
 ```
 
 ### JSON -> CSV ###
+```js
 var simplecsv = require('simplecsv');
 var csv = new simplecsv.csv();
 
-var planetCsv  = csv.JSONToCsvdata('[{"Planet Name":"Mars"," Color":"red-orange"},'
+var planetCsv  = csv.JSONToCsvdata('[{"Planet Name":"Mars"," Color":"red-orange"},' +
                                     '{"Planet Name":"Uranus"," Color":"light-blue"}]');
 
-var str = csv.(planetCsv);
 
+var str = csv.csvdataToString(planetCsv);
 console.log(str);
+```
 
+output is:
+```
+Planet Name, Color
+Mars,red-orange
+Uranus,light-blue
+```
+
+### console.log() every cell ###
+
+```js
+var simplecsv = require('simplecsv');
+var csv = new simplecsv.csv();
+
+var cdata = csv.parseString('Planet Name, Color\nMars,red-orange\nUranus,light-blue', { hasHeaders: true });
+for (var i = 0; i < cdata.rowCount; i++) {
+  for (var j = 0; j < cdata.columnCount; j++) {
+    console.log(cdata.rows[i][j]);
+  }
+}
+```
+
+### find errors ###
+
+```js
+var simplecsv = require('simplecsv');
+var csv = new simplecsv.csv();
+
+var cdata = csv.parseString('Planet Name, Color\nMars\nred-orange, Uranus,light-blue', { hasHeaders: true });
+console.log(csv.findErrors(cdata));
+```
 
 # Quick Start #
-
-# Newline #
-
-SimpleCSV.js uses `\n` and `\r\n` for newline when parsing. Currently there is no support for Mac's `\r` for newline (i.e. universal mode in Python csv). 
 
 # Install #
 
@@ -80,63 +108,9 @@ Install with [npm](https://www.npmjs.com/).
 $ npm install simplecsv
 ~~~
 
+# Newline #
 
+SimpleCSV.js uses `\n` and `\r\n` for newline when parsing. Currently there is no support for Mac's `\r` for newline (i.e. universal mode in Python csv). 
 
-
-
-
-# Contributing to the project
-
-All contributers are welcome. More hands, better code! 
-
-# Development
-
-In order to develop SimpleCSV.js, you need to install [Node.js](https://nodejs.org/). You also need [NPM](https://www.npmjs.com/), but it comes bundled with Node.js installation.
-
-In order install all the dev dependecies (i.e. all the packages you need to develop)
-
-~~~
-$ npm install --dev
-~~~
-
-## Building SimpleCSV.js
-
-We use [Grunt.js](http://gruntjs.com/) for building the package and managing test jobs. The default task will lint, build, unit test, browserify, browser unittest, and produce the uglified code. Just run:
-
-~~~
-$ grunt
-~~~
-
-If you only want to test the library, you can run the mocha unittests and browserify'ied 
-
-~~~
-$ grunt test
-~~~
-
-This calls 
-You can run mocha unittests without the browser tests with:
-
-~~~
-$ grunt localtest
-~~~
-
-And finally, you can run the unittests for *browserify*'ied library with:
-
-This will do everything the default command does sans uglify. 
-
-# Unittesting
-
-All features are unit tested.
-
-## Parser ##
-
-The parser is exhaustively tested against the output of [Python CSV parser](https://docs.python.org/2/library/csv.html). The test cases are written in a JSON file called `testcases_as_csv.json`, along with the expected results in another JSON file called `parsed_test_cases_as_arrays.json`. The unittest for the parser will go through each test instance in `testcases_as_csv.json` and compare them to the parsed output in `parsed_test_cases_as_arrays.json`. 
-
-You can feed this file (`testcases_as_csv.json`) to the python program `parsetestcases.py` to produce `parsed_test_cases_as_arrays.json`. **Beware:** the names of the test cases should be unique.
-
-## Kudos ##
-
-While implementing non-exporting private methods and unittesting them, I used the methods suggested by Mark S.Everitt [in this presentation @ Async.](https://speakerdeck.com/qubyte/writing-testable-private-methods-with-node-dot-js-modules). 
-
-
-
+# Development #
+[Refer to development notes](other)
