@@ -11,6 +11,44 @@ var private = new private();
 
 function csv() {}
 
+// Produces simple string output of csvdata.
+// Ex. Given csvdata of:
+// { column_names: { "magician", "born"},
+//   rows: { { "houdini", 1874 },
+//           { "copperfield", 1956} }
+// }
+// csvdataToString() will produce
+// "magician, born\r\nhoudini, 1874\ncopperfield, 1956\r\n"
+csv.prototype.csvdataToString = function(input, argdic) {
+  var delim = private.getArg(argdic, 'delim', ',');
+  var str = '';
+  var columnnames = input.columnNames;
+  if (typeof columnnames !== 'undefined') {
+    for (var i = 0; i < columnnames.length; i++) {
+      str += private.doubleQuoteIfNecessary(columnnames[i]) + delim;
+    }
+    if (str.length > 0) {
+      str = str.slice(0, - 1) + '\r\n';
+    }
+  }
+
+  var rows = input.rows;
+  if (typeof rows === 'undefined') return str;
+  
+  for (var k = 0; k < rows.length; k++) {
+    var temp = '';
+    for (var m = 0; m < rows[k].length; m++) {
+      temp += private.doubleQuoteIfNecessary(rows[k][m]) + delim;
+    }
+    if (temp.length > 0) {
+      temp = temp.slice(0, - 1);
+    }
+    str += temp + '\r\n';
+  }
+  return str;
+};
+
+
 // Produces the JSON of the csvdata.
 // Uses JSON table schema: http://dataprotocols.org/json-table-schema/
 // Ex. Given csvdata of:
@@ -19,7 +57,7 @@ function csv() {}
 //           { "copperfield", 1956} }
 // }
 //
-// toJSON() will produce:
+// csvdataToJSON() will produce:
 //
 //   {
 //      "magician":"houdini",
@@ -29,10 +67,24 @@ function csv() {}
 //       "magician":"copperfield",
 //       "born":1956
 //   }
-csv.prototype.csvdataToJSON = function(csvdata) {
+csv.prototype.csvdataToJSON = function(input) {
   var jsondata = '';
-  var columnnames = csvdata.columnNames;
-  var rows = csvdata.rows;
+  var columnnames = input.columnNames;
+
+  // No columnnames, let's fill it up with generated names  
+  if (typeof columnnames === 'undefined' ||
+      (columnnames.length === 0 && input.columnCount !== 0)) {
+    var digitCount = input.columnCount.toString().length;
+    columnnames = [];
+    
+    for (var m = 0; m < input.columnCount; m++) {
+      var neededZeroCount = digitCount - m.toString().length;
+      var fullname = 'Col ' + Array(neededZeroCount + 1).join('0') + m.toString();
+      columnnames.push(fullname);
+    }
+  }
+
+  var rows = input.rows;
   var output = [];
 
   for (var i = 0; i < rows.length; i++) {
@@ -114,15 +166,19 @@ csv.prototype.parseString= function(str, argdic) {
 // as csvdata, it creates a csvdata from those properties.
 csv.prototype.makeCsvdataFromObj= function(obj) {
   if (typeof obj === 'undefined') return;
-  retVal = new csvdata();
+  var retVal = new csvdata();
+
   if (typeof obj.columnCount !== 'undefined') {
     retVal.columnCount = obj.columnCount;
-  }
+  } 
   if (typeof obj.columnNames !== 'undefined') {
-    retVal.columnNames = obj.columnNames;
+    retVal.columnNames = obj.columnNames.slice();
   }
   if (typeof obj.rows !== 'undefined') {
-    retVal.rows = obj.rows;
+    retVal.rows = [];
+    for (var i = 0; i < obj.rows.length; i++) {
+      retVal.rows.push(obj.rows[i].slice());
+    }
   }
   if (typeof obj.columnCount !== 'undefined') {
     retVal.rowCount = obj.rowCount;
@@ -131,10 +187,10 @@ csv.prototype.makeCsvdataFromObj= function(obj) {
 };
 
 // Find errors
-csv.prototype.findErrors= function(csvdata) {
+csv.prototype.findErrors= function(input) {
   // Check length of rows
   var errors = [];
-  var rows = csvdata.rows;
+  var rows = input.rows;
   var columncount = rows[0].length;
   var types = [];
   for (var j = 0; j < rows[0].length; j++) {
@@ -149,8 +205,8 @@ csv.prototype.findErrors= function(csvdata) {
       }
     }
   }
-  if (csvdata.columnCount !== columncount) {
-    errors.push('Column count is ' + csvdata.columnCount +
+  if (input.columnCount !== columncount) {
+    errors.push('Column count is ' + input.columnCount +
                   ' but Row 0 has ' + columncount + ' cols');
   }
   for (var i = 0; i < rows.length; i++) {
@@ -184,15 +240,44 @@ exports = module.exports = private;
 
 function private() {}
 
+// Double-quotes the fields according the rules on Wikipedia as of 6/2015.
+// (https://en.wikipedia.org/wiki/Comma-separated_values)
+//
+// * Fields with embedded commas or double-quote characters must be quoted.
+// * Each of the embedded double-quote characters must be represented by a pair of double-quote characters.
+// * Fields with embedded line breaks must be quoted.
+// * (Python addition) Python quotes \r always. 
+private.prototype.doubleQuoteIfNecessary = function(input) {
+  var shouldDoubleQuote = false;
+  for (var i = 0; i < input.length; i++) {
+    if (input[i] === ',' ||   // comma
+        input[i] === '"' ||   // double-quote
+        input[i] === '\n' ||  // newline
+        input[i] === '\r') {
+      shouldDoubleQuote = true;
+      break;   // optimize the cats!
+    }
+  }
+  var output = '';
+  for (var j = 0; j < input.length; j++) {
+    output += input[j];   
+    if (input[j] === '"') output += '"';
+  }
+  if (shouldDoubleQuote) {
+    output = '"' + output + '"';
+  }
+  return output;
+};
+
+
 // Get the argument from the argument dictionary, with a default value.
 // Default value (defval) is returned if the argument is not in the argument:value
 // dictionary, or, if the argument's type is not the same as default value.
-function getArg(argDic, argName, defVal) {
+private.prototype.getArg = function(argDic, argName, defVal) {
   return (typeof argDic !== 'undefined' &&
           typeof argDic[argName] !== 'undefined' &&
           typeof argDic[argName] === typeof defVal) ? argDic[argName] : defVal;
-}
-private.prototype.getArg = getArg;
+};
 
 // Given a str, it parses it into array.
 // Seperator is always ,
@@ -206,7 +291,7 @@ private.prototype.getArg = getArg;
 // delim: one char [default:',']
 // hasComments: true/false [default:false]
 //              if true, any row which starts with '#' will be skipped.
-function parseStringToArray(str, argdic) {
+private.prototype.parseStringToArray = function(str, argdic) {
 
   var delim = this.getArg(argdic, 'delim', ',');
   var hasComments = this.getArg(argdic, 'hasComments', false);
@@ -233,6 +318,13 @@ function parseStringToArray(str, argdic) {
         j++;
       }
     } else {
+      // Special situation: skip \r, if it is part of \r\n
+      if (str[j] === '\r' &&
+          j + 1 < str.length &&
+          str[j+1] === '\n' ) {
+            j++;
+          }
+      // Look at double-quotes
       if (str[j] === '"') {
         noCharSinceRowPush = false;
         // This is a double-quoted cell, let's retrieve the whole cell.
@@ -297,9 +389,7 @@ function parseStringToArray(str, argdic) {
     allRows.push(currentRow);
   }
   return allRows;
-}
-
-private.prototype.parseStringToArray = parseStringToArray;
+};
 
 },{}],"simplecsv":[function(require,module,exports){
 /**
