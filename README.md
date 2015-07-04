@@ -9,6 +9,11 @@ SimpleCSV.js is a fast and compact JavaScript csv library for parsing csv string
 * **JSON parser included:** Convert CSV -> JSON, or JSON -> CSV.
 * **No dependancies:** Small standalone .js file. 
 
+## Downloads ##
+
+[Version 0.0.1 (Minimized) : http://simplecsvjs.com/dist/simplecsv.0.0.1.standalone.min.js](http://simplecsvjs.com/dist/simplecsv.0.0.1.standalone.min.js)
+[Version 0.0.1 (Un-Minimized) : http://simplecsvjs.com/dist/simplecsv.0.0.1.standalone.js](http://simplecsvjs.com/dist/simplecsv.0.0.1.standalone.js)
+
 ## Examples ##
 
 ### Browser ###
