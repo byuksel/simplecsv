@@ -118,4 +118,4 @@ $ npm install simplecsv
 SimpleCSV.js uses `\n` and `\r\n` for newline when parsing. Currently there is no support for Mac's `\r` for newline (i.e. universal mode in Python csv). 
 
 # Development #
-[Refer to development notes](other)
+[Refer to development notes](/blob/master/CONTRIBUTING.md)
