@@ -1,6 +1,6 @@
 # SimpleCSV.js
 
-SimpleCSV.js is a compact JavaScript csv library for parsing csv strings, and parsing JSON table objects.
+SimpleCSV.js is a fast and compact JavaScript csv library for parsing csv strings, and parsing JSON table objects.
 
 ## Features ##
 
@@ -36,7 +36,7 @@ var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
 ## More Examples ##
 
 
-### CSV string -> JSON ###
+### CSV to JSON ###
 
 ```js
 var simplecsv = require('simplecsv');
@@ -50,7 +50,7 @@ console.log(str);
 ```
 
 output is:
-```js
+```json
 [{"Planet Name":"Mars"," Color":"red-orange"},{"Planet Name":"Uranus"," Color":"light-blue"}]
 ```
 

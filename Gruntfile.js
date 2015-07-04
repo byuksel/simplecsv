@@ -101,12 +101,12 @@ module.exports = function(grunt) {
     // uglify our one simplecsv.js file.
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: '/*! <%= pkg.name %>.<%= pkg.version %>.<%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       dist: {
         files: {
           // Uglify browserified library
-          'browser/dist/<%= pkg.name %>.standalone.min.js':
+          'browser/dist/<%= pkg.name %>.<%= pkg.version %>.standalone.min.js':
           ['<%= browserify.standalone.dest %>']
         }
       }
