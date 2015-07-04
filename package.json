@@ -1,7 +1,7 @@
 {
   "name": "simplecsv",
   "version": "0.0.1",
-  "description": "A simple csv parser JS and library in Javascript.",
+  "description": "Fast and compact CSV parser for parsing CSV with CSV to JSON support.",
   "keywords": [
     "csv",
     "csvparser",
@@ -10,9 +10,12 @@
     "simple csv js",
     "simple csv javascript",
     "simple csv parser js",
-    "simple csv parser javascript"
+    "simple csv parser javascript",
+    "json csv",
+    "json csv parser",
+    "json table"
   ],
-  "homepage": "http://simplecsv.com",
+  "homepage": "http://simplecsvjs.com",
   "author": {
     "name": "Baris Yuksel",
     "url": "http://barisyuksel.com"
