@@ -49,4 +49,6 @@ You can feed this file (`testcases_as_csv.json`) to the python program `parsetes
 
 ## Kudos ##
 
-While implementing non-exporting private methods and unittesting them, I used the methods suggested by Mark S.Everitt [in this presentation @ Async.](https://speakerdeck.com/qubyte/writing-testable-private-methods-with-node-dot-js-modules). 
+* While implementing non-exporting private methods and unittesting them, I used the methods suggested by Mark S.Everitt [in this presentation @ Async.](https://speakerdeck.com/qubyte/writing-testable-private-methods-with-node-dot-js-modules). 
+
+* Thank you [Casey Brown](http://blondegirlcodes.com) for designing SimpleCSV.js logo. 
