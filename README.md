@@ -48,7 +48,7 @@ var simplecsv = require('simplecsv');
 var csv = new simplecsv.csv();
 
 var planetCsv  = csv.parseString('Planet Name, Color\nMars,red-orange\nUranus,light-blue',
-                                 { hasHeaders: true} );
+                                 { hasHeaders: true });
 var str = csv.csvdataToJSON(planetCsv);
 
 console.log(str);
