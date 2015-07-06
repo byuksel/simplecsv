@@ -20,7 +20,7 @@ SimpleCSV.js is a fast and compact JavaScript csv library for parsing csv string
 
 In any web page:
 ```html
-<script src="http://simplecsvjs.com/dist/simplecsv.0.0.1.standalone.min.js"></script>
+<script src="http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.min.js"></script>
 <script>
   var simplecsv = require('simplecsv');
   var csv = new simplecsv.csv();
