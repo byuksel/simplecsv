@@ -1,3 +1,4 @@
+// Copyright (c) 2015 Baris Yuksel <baris@onehundredyearsofcode.com>
 /*jshint expr: true*/
 var simplecsv = require('../simplecsv'),
     csvdata = simplecsv.csvdata,

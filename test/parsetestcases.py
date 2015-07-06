@@ -1,3 +1,6 @@
+# Copyright (c) 2015 All Rights Reserved.
+# Author: Baris Yuksel <baris@onehundredyearsofcode.com>
+#
 # This file parses testcsv.json in Python and saves its results
 # to expectedcsv.json. SimpleCSV.js is tested against Pyton's
 # csv parser. It is aimed at producing the same results.
@@ -12,10 +15,10 @@ def main():
     ' writes the output to a JSON file. These files are then used by the'
     ' unittests of SimpleCSV.js.')
   parser.add_argument('--infile', '-i',
-                      default='testcases_as_csv.json', 
+                      default='testcases_as_csv.json',
                       help='Input JSON file. default:testcases_as_csv.json')
   parser.add_argument('--outfile', '-o',
-                      default='parsed_testcases_as_arrays.json', 
+                      default='parsed_testcases_as_arrays.json',
                       help='Output JSON file. default:parsed_testcases_as_arrays.json')
   args = parser.parse_args()
   with open(args.infile, 'r') as infile, open(args.outfile, 'w') as outfile:
@@ -49,7 +52,7 @@ def main():
       # Read the test
       outParsed['testname'] = inTest['testname']
       outParsed['instances'] = outInstances
-      outParsed['instancesAsString'] = outInstancesAsString 
+      outParsed['instancesAsString'] = outInstancesAsString
       outTestcases.append(outParsed)
     outdata = { 'parsedcases': outTestcases }
     json.dump(outdata, outfile, indent=2)

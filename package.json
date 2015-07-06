@@ -1,6 +1,6 @@
 {
   "name": "simplecsv",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Fast and compact CSV parser for parsing CSV with CSV to JSON support.",
   "keywords": [
     "csv",
