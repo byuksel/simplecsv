@@ -11,8 +11,8 @@ SimpleCSV.js is a fast and compact JavaScript csv library for parsing csv string
 
 ## Downloads ##
 
-* [Version 0.0.3 (Minimized, 4.2K) : http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.min.js](http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.min.js)
-* [Version 0.0.3 (Un-Minimized), 12K : http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.js](http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.js)
+* [Version 0.0.3, minimized, 4.2K : http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.min.js](http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.min.js)
+* [Version 0.0.3, un-minimized, 12K : http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.js](http://simplecsvjs.com/dist/simplecsv.0.0.3.standalone.js)
 
 ## Examples ##
 
