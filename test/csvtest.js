@@ -18,6 +18,14 @@ var private = new private();
 
 describe('SimpleCsv.js Unit Test', function() {
 
+  it('(csvdata) changes in one csvdata should not effect the other', function(){
+    var a = new csvdata();
+    a.columnNames.push('Silicon');
+    var b = new csvdata();
+    expect(a.columnNames).not.eql(b.columnNames);
+    expect(b.columnNames).eql([]);
+  });
+
   it('(csvdataToJSON and JSONToCsvdata) should return a true representation of csv in JSON', function(){
     var test  = csv.makeCsvdataFromObj({ columnNames : [ '11', '12' ],
                                          rows : [ [ '4', 0 ], [ '5', 0 ] ],
@@ -81,14 +89,14 @@ describe('SimpleCsv.js Unit Test', function() {
                                                   rowCount : 1 ,
                                                   columnCount: 2 });
     expect(realOutput).to.eql(expectedOutput);
-    
+
     argdic = { hasHeaders: false };
     realOutput = csv.parseString('1,2\n3,4\n', argdic);
     expectedOutput = csv.makeCsvdataFromObj({ rows : [ [ '1', '2' ], [ '3', '4' ] ],
                                               rowCount : 2 ,
                                               columnCount: 2 });
     expect(realOutput).to.eql(expectedOutput);
-  }); 
+  });
 
   it('(private.parseStringToArray) should parse csv cases in testcases_as_csv.json', function() {
     // Read the expected values from parsedtestJSON
