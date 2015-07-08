@@ -144,12 +144,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.registerTask('test2', ['mocha_cov']);
-  grunt.registerTask('dist', ['env:dist', 'clean', 'browserify', 'uglify']);
-  grunt.registerTask('localtest', ['env:test', 'clean', 'jshint', 'mochaTest']);
-  grunt.registerTask('browsertest', ['env:test', 'clean', 'jshint', 'browserify', 'connect:server', 'mocha_phantomjs']);
+  grunt.registerTask('dist', ['env:dist', 'clean', 'replace', 'browserify', 'uglify']);
+  grunt.registerTask('localtest', ['env:test', 'clean', 'replace', 'jshint', 'mochaTest']);
+  grunt.registerTask('browsertest', ['env:test', 'clean', 'replace', 'jshint', 'browserify', 'connect:server', 'mocha_phantomjs']);
   grunt.registerTask('test', ['localtest', 'browsertest']);
   grunt.registerTask('default', ['test', 'dist']);
-//  grunt.registerTask('yoga', ['replace']);
-  grunt.registerTask('yoga', ['uglify']);
-
 };
