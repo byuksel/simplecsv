@@ -47,9 +47,9 @@ var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
 var simplecsv = require('simplecsv');
 var csv = new simplecsv.csv();
 
-var jsonStr  = csv.CSVToJSON('Planet Name, Color\nMars,red-orange\nUranus,light-blue',
-                              { hasHeaders: true });
-console.log(jsonStr);
+var jsonObj = csv.CSVToJSON('Planet Name, Color\nMars,red-orange\nUranus,light-blue',
+                            { hasHeaders: true });
+console.log(jsonObj);
 ```
 
 output is:
