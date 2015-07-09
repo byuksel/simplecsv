@@ -46,23 +46,10 @@ module.exports = function(grunt) {
                '!lib/garbage/**/*',]
       }
     },
-    // use blanket to get coverage stats on mocha tests
-    mocha_cov: {
-      options: {
-        instrument: false,
-        coveralls: true,
-        reporter: 'spec',
-        require: ['should']
-      },
-      all: ['test/**/*.js']
-    },
-
-    // run the mocha tests via Node.js
     mochaTest: {
       test: {
         options: {
           reporter: 'spec',
-          // require: 'coverage/blanket',
           captureFile: 'test/output/output.txt'
         },
 
@@ -143,7 +130,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.registerTask('test2', ['mocha_cov']);
   grunt.registerTask('dist', ['env:dist', 'clean', 'replace', 'browserify', 'uglify']);
   grunt.registerTask('localtest', ['env:test', 'clean', 'replace', 'jshint', 'mochaTest']);
   grunt.registerTask('browsertest', ['env:test', 'clean', 'replace', 'jshint', 'browserify', 'connect:server', 'mocha_phantomjs']);
