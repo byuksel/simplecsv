@@ -1,13 +1,13 @@
 [![SimpleCSV.js Logo](http://simplecsvjs.com/simplecsv.png)](/)
 
-SimpleCSV.js is a fast and compact JavaScript csv library for parsing csv strings, and parsing JSON table objects.
+SimpleCSV.js is a fast and compact JavaScript CSV library for parsing csv strings, and parsing JSON table objects.
 
 ## Features ##
 
-* **In-the-Browser, For-The-Browser:** Only 3 lines of code to parse csv strings.
-* **Python csv compatible:** Guaranteed to produce the same results as Python 2.7's csv parser.
-* **JSON parser included:** Convert CSV -> JSON, or JSON -> CSV.
-* **No dependancies:** Small standalone .js file.
+* **In-the-Browser, For-The-Browser:** Only 3 lines of code to parse CSV strings, and JSON tables.
+* **Python csv compatible:** Guaranteed to produce the same results as Python 2.7 csv parser.
+* **JSON parser:** Convert CSV to JSON, or JSON to CSV.
+* **No dependancies:** Tiny standalone .js file.
 
 ## Downloads ##
 
@@ -47,11 +47,9 @@ var parsedCsvdata = csv.parseString('Turing, 35, chess\nSamuel, 21, checkers');
 var simplecsv = require('simplecsv');
 var csv = new simplecsv.csv();
 
-var planetCsv  = csv.parseString('Planet Name, Color\nMars,red-orange\nUranus,light-blue',
-                                 { hasHeaders: true });
-var str = csv.csvdataToJSON(planetCsv);
-
-console.log(str);
+var jsonStr  = csv.CSVToJSON('Planet Name, Color\nMars,red-orange\nUranus,light-blue',
+                              { hasHeaders: true });
+console.log(jsonStr);
 ```
 
 output is:
@@ -64,11 +62,8 @@ output is:
 var simplecsv = require('simplecsv');
 var csv = new simplecsv.csv();
 
-var planetCsv  = csv.JSONToCsvdata('[{"Planet Name":"Mars"," Color":"red-orange"},' +
-                                    '{"Planet Name":"Uranus"," Color":"light-blue"}]');
-
-
-var str = csv.csvdataToString(planetCsv);
+var str  = csv.JSONToCSV('[{"Planet Name":"Mars"," Color":"red-orange"},' +
+                         '{"Planet Name":"Uranus"," Color":"light-blue"}]');
 console.log(str);
 ```
 
@@ -123,3 +118,6 @@ For bug reports, feature requests and general questions, please feel free to ema
 
 # Development #
 [Refer to development notes](/CONTRIBUTING.md)
+
+# Documentation #
+[Library manual](/MANUAL.md)
