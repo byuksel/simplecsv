@@ -1,4 +1,10 @@
-// Copyright (c) 2015 Baris Yuksel <baris@onehundredyearsofcode.com>
+/**
+ * @copyright Copyright (c) 2015 All Rights Reserved.
+ * @author Baris Yuksel <baris@onehundredyearsofcode.com>
+ *
+ * @file Simple CSV library unittests
+ */
+
 /*jshint expr: true*/
 var simplecsv = require('../simplecsv'),
     csvdata = simplecsv.csvdata,
@@ -13,8 +19,7 @@ var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 
-var csv = new csv();
-var private = new private();
+var mycsv = new csv();
 
 describe('SimpleCsv.js Unit Test', function() {
 
@@ -27,36 +32,36 @@ describe('SimpleCsv.js Unit Test', function() {
   });
 
   it('(csvdataToJSON and JSONToCsvdata) should return a true representation of csv in JSON', function(){
-    var test  = csv.makeCsvdataFromObj({ columnNames : [ '11', '12' ],
-                                         rows : [ [ '4', 0 ], [ '5', 0 ] ],
-                                         rowCount : 2 ,
-                                         columnCount: 2 });
-    var actualOutput = csv.csvdataToJSON(test);
+    var test  = mycsv.makeCsvdataFromObj({ columnNames : [ '11', '12' ],
+                                           rows : [ [ '4', 0 ], [ '5', 0 ] ],
+                                           rowCount : 2 ,
+                                           columnCount: 2 });
+    var actualOutput = mycsv.csvdataToJSON(test);
     var expectedOutput = '[{"11":"4","12":0},{"11":"5","12":0}]';
     expect(actualOutput).eql(expectedOutput);
-    var actualConvertedCsvdata = csv.JSONToCsvdata(actualOutput);
+    var actualConvertedCsvdata = mycsv.JSONToCsvdata(actualOutput);
     expect(actualConvertedCsvdata).eql(test);
   });
 
   it('(csvdataToJSON) should generate zero padded column names when no column names', function(){
-    var test  = csv.makeCsvdataFromObj({ rows : [ [ '4', 0 ], [ '5', 0 ] ],
-                                         rowCount : 2 ,
-                                         columnCount: 2 });
-    var actualOutput = csv.csvdataToJSON(test);
+    var test  = mycsv.makeCsvdataFromObj({ rows : [ [ '4', 0 ], [ '5', 0 ] ],
+                                           rowCount : 2 ,
+                                           columnCount: 2 });
+    var actualOutput = mycsv.csvdataToJSON(test);
     var expectedOutput = '[{"Col 0":"4","Col 1":0},{"Col 0":"5","Col 1":0}]';
     expect(actualOutput).eql(expectedOutput);
-    var actualConvertedCsvdata = csv.JSONToCsvdata(actualOutput);
+    var actualConvertedCsvdata = mycsv.JSONToCsvdata(actualOutput);
     expect(actualConvertedCsvdata).not.eql(test);
     test.columnNames = [ 'Col 0', 'Col 1'];
     expect(actualConvertedCsvdata).eql(test);
   });
 
   it('(findErrors) should find errors', function() {
-    var test  = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
-                                         rows : [ [ 3, '4' ], [ '5' ] ],
-                                         rowCount : 10 ,
-                                         columnCount: 22});
-    var actualOutput = csv.findErrors(test);
+    var test  = mycsv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
+                                           rows : [ [ 3, '4' ], [ '5' ] ],
+                                           rowCount : 10 ,
+                                           columnCount: 22});
+    var actualOutput = mycsv.findErrors(test);
     var expectedOutput = [
       "Type mismatch at row:1 col:0 expected:number actual:string",
       "Column count is 22 but Row 0 has 2 cols",
@@ -83,18 +88,18 @@ describe('SimpleCsv.js Unit Test', function() {
 
   it('(parseString) should handle hasHeaders correctly', function() {
     var argdic = { hasHeaders: true };
-    var realOutput = csv.parseString('1,2\n3,4\n', argdic);
-    var expectedOutput = csv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
-                                                  rows : [ [ '3', '4' ] ],
-                                                  rowCount : 1 ,
-                                                  columnCount: 2 });
+    var realOutput = mycsv.parseString('1,2\n3,4\n', argdic);
+    var expectedOutput = mycsv.makeCsvdataFromObj({ columnNames : [ '1', '2' ],
+                                                    rows : [ [ '3', '4' ] ],
+                                                    rowCount : 1 ,
+                                                    columnCount: 2 });
     expect(realOutput).to.eql(expectedOutput);
 
     argdic = { hasHeaders: false };
-    realOutput = csv.parseString('1,2\n3,4\n', argdic);
-    expectedOutput = csv.makeCsvdataFromObj({ rows : [ [ '1', '2' ], [ '3', '4' ] ],
-                                              rowCount : 2 ,
-                                              columnCount: 2 });
+    realOutput = mycsv.parseString('1,2\n3,4\n', argdic);
+    expectedOutput = mycsv.makeCsvdataFromObj({ rows : [ [ '1', '2' ], [ '3', '4' ] ],
+                                                rowCount : 2 ,
+                                                columnCount: 2 });
     expect(realOutput).to.eql(expectedOutput);
   });
 
@@ -132,14 +137,14 @@ describe('SimpleCsv.js Unit Test', function() {
               ' Expected( ' + JSON.stringify(expected[k]) + ') ';
         expect(output).to.eql(expected[k], msg);
         // Check if the csvdataToString works
-        var myCsvdata = csv.makeCsvdataFromObj({ rows: output});
-        output = csv.csvdataToString(myCsvdata, argdic);
+        var myCsvdata = mycsv.makeCsvdataFromObj({ rows: output});
+        output = mycsv.csvdataToString(myCsvdata, argdic);
         msg = 'CsvdataToString TEST: Testname(' + myObj.testname + ') ' +
-              ' argdic(' + JSON.stringify(argdic) + ') ' +
-              ' index(' + k + ') ' +
-              ' Instance(' + JSON.stringify(toBeParsed[k]) + ') ' +
-              ' CsvdataToString_Output( ' + JSON.stringify(output) + ') ' +
-              ' Expected_InstanceInString( ' + JSON.stringify(expectedAsString[k]) + ') ';
+          ' argdic(' + JSON.stringify(argdic) + ') ' +
+          ' index(' + k + ') ' +
+          ' Instance(' + JSON.stringify(toBeParsed[k]) + ') ' +
+          ' CsvdataToString_Output( ' + JSON.stringify(output) + ') ' +
+          ' Expected_InstanceInString( ' + JSON.stringify(expectedAsString[k]) + ') ';
         expect(output).to.eql(expectedAsString[k], msg);
       }
     }
