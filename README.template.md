@@ -120,4 +120,4 @@ For bug reports, feature requests and general questions, please feel free to ema
 [Refer to development notes](/CONTRIBUTING.md)
 
 # Documentation #
-[Lib manual](/docs/index.html)
+[Library manual](https://cdn.rawgit.com/byuksel/simplecsv/master/docs/index.html)

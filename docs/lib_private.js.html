@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib/private.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lib/private.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @copyright Copyright (c) 2015 All Rights Reserved.
+ * @author Baris Yuksel &lt;baris@onehundredyearsofcode.com>
+ *
+ * @file Simple CSV library private methods.
+ */
+exports = module.exports = private;
+
+/**
+ * @constructor
+ */
+function private() {}
+
+/**
+ * Double-quotes the fields according the rules on Wikipedia as of 6/2015.
+ * (https://en.wikipedia.org/wiki/Comma-separated_values)
+ *
+ * * Fields with embedded commas or double-quote characters must be quoted.
+ * * Each of the embedded double-quote characters must be represented by a pair of double-quote characters.
+ * * Fields with embedded line breaks must be quoted.
+ * * (Python addition) Python quotes \r always.
+ */
+private.doubleQuoteIfNecessary = function(input) {
+  var shouldDoubleQuote = false;
+  var output = '';
+  for (var i = 0; i &lt; input.length; i++) {
+    if (input[i] === ',' ||   // comma
+        input[i] === '"' ||   // double-quote
+        input[i] === '\n' ||  // newline
+        input[i] === '\r') {
+      shouldDoubleQuote = true;
+    }
+    output += input[i];
+    if (input[i] === '"') output += '"';  // double-quote double-quote
+  }
+  if (shouldDoubleQuote) {
+    output = '"' + output + '"';
+  }
+  return output;
+};
+
+/**
+ * Get the argument from the argument dictionary, with a default value.
+ * Default value (defval) is returned if the argument is not in the argument:value
+ * dictionary, or, if the argument's type is not the same as default value.
+ */
+private.getArg = function(argDic, argName, defVal) {
+  return (typeof argDic !== 'undefined' &amp;&amp;
+          typeof argDic[argName] !== 'undefined' &amp;&amp;
+          typeof argDic[argName] === typeof defVal) ? argDic[argName] : defVal;
+};
+
+/**
+ * Given a str, it parses it into array.
+ * Seperator is always ,
+ * Follows http://tools.ietf.org/html/rfc4180
+ * as in: "Fields containing line breaks (CRLF), double quotes, and commas
+ * should be enclosed in double-quotes."
+ * params is a dictionary of possible parameters. The tuples in the dictionary
+ * should be string pairs.
+ * hasHeaders: true/false
+ *             if true,
+ * delim: one char [default:',']
+ * hasComments: true/false [default:false]
+ * if true, any row which starts with '#' will be skipped.
+ */
+private.parseStringToArray = function(str, argdic) {
+
+  var delim = this.getArg(argdic, 'delim', ',');
+  var hasComments = this.getArg(argdic, 'hasComments', false);
+
+  // Define a function that returns true if the char is a terminator
+  // Terminator chars are: delim char, \n
+  function isTerminator(myChar) {
+    if ( '\n' === myChar ||
+        delim === myChar) {
+      return true;
+    }
+    return false;
+  }
+
+  var noCharSinceRowPush = true;
+  var allRows = [];
+  var currentRow = [];
+  var currentCell = '';
+  var j = 0;
+  while (j &lt; str.length) {
+    if (hasComments &amp;&amp; noCharSinceRowPush &amp;&amp; str[j] === '#') {
+      // The first char of the row is comment char
+      while (j &lt; str.length &amp;&amp; str[j] !== '\n') {
+        j++;
+      }
+    } else {
+      // Special situation: skip \r, if it is part of \r\n
+      if (str[j] === '\r' &amp;&amp;
+          j + 1 &lt; str.length &amp;&amp;
+          str[j+1] === '\n' ) {
+            j++;
+          }
+      // Look at double-quotes
+      if (str[j] === '"') {
+        noCharSinceRowPush = false;
+        // This is a double-quoted cell, let's retrieve the whole cell.
+        var quoteCount = 0;
+        var endOfWord = j + 1;
+        while (endOfWord &lt; str.length) {
+          if (str[endOfWord] === '"') {
+            // Found quote. Are we at the end of a cell?
+            if ((endOfWord + 1) === str.length ||
+                (isTerminator(str[endOfWord + 1]) &amp;&amp; (quoteCount % 2) === 0))  {
+              // Yes, this is the end of the cell.
+              break;
+            } else {
+              // No, this is just another quote.
+              quoteCount++;
+            }
+          } else if ((endOfWord + 1) === str.length) {
+            // This should never happen, it means the cell was not quoted correctly.
+            // But still, let's save the situation by moving endOfWord by one so that
+            // we include the last character in the cell's value.
+            endOfWord++;
+            break;
+          }
+          endOfWord++;
+        }
+
+        currentCell = str.substring(j + 1, endOfWord);
+        currentCell = currentCell.replace(/""/g, '"');
+        j = endOfWord ;
+      } else if (isTerminator(str[j])) {
+        if (str[j] !== '\n') {
+          // Special case for empty rows which start with \n
+          // essentially, if the terminator is not \n, then
+          // we assume we had chars since row push.
+          noCharSinceRowPush = false;
+        }
+        currentRow.push(currentCell);
+        currentCell = '';
+        if (str[j] === '\n') {
+          // Special case for empty rows which start with \n.
+          // Python csv parser parses them as empty rows instead of
+          // rows having one empty string.
+          if (noCharSinceRowPush) {
+            currentRow = [];
+          }
+          // End of row
+          allRows.push(currentRow);
+          currentRow = [];
+          noCharSinceRowPush = true;
+        }
+      } else {
+        noCharSinceRowPush = false;
+        currentCell += str[j];
+      }
+    }
+    j++;
+  }
+  if (!noCharSinceRowPush) {
+    // If we have seen some chars after last row push
+    // Then, push this cell again
+    currentRow.push(currentCell);
+    allRows.push(currentRow);
+  }
+  return allRows;
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="csv.html">csv</a></li><li><a href="csvdata.html">csvdata</a></li><li><a href="private.html">private</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Tue Jul 14 2015 01:51:37 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

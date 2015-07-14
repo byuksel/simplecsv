@@ -25,14 +25,14 @@ module.exports = function(grunt) {
         ]
       }
     },
-    env: {
-      test: {
-        NODE_TEST: 'test',
-      },
-      dist: {
-        NODE_TEST: null,
+    jsdoc: {
+      all: {
+        src: ['lib/*.js', 'test/*.js'],
+        jsdoc: '/Users/barisyuksel/data/npm-global/bin/jsdoc',
+        options: {
+          destination: 'docs'
+        }
       }
-
     },
     // jshint all the src files.
     jshint: {
@@ -122,7 +122,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-replace');
-  grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-browserify');
@@ -130,9 +130,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.registerTask('dist', ['env:dist', 'clean', 'replace', 'browserify', 'uglify']);
-  grunt.registerTask('localtest', ['env:test', 'clean', 'replace', 'jshint', 'mochaTest']);
-  grunt.registerTask('browsertest', ['env:test', 'clean', 'replace', 'jshint', 'browserify', 'connect:server', 'mocha_phantomjs']);
-  grunt.registerTask('test', ['localtest', 'browsertest']);
-  grunt.registerTask('default', ['test', 'dist']);
+  grunt.registerTask('docs', ['replace', 'jsdoc']);
+  grunt.registerTask('dist', ['clean:dist', 'browserify', 'uglify']);
+  grunt.registerTask('localtest', ['clean:tests', 'jshint', 'mochaTest']);
+  grunt.registerTask('browsertest', ['clean:tests', 'jshint', 'browserify', 'connect:server', 'mocha_phantomjs']);
+  grunt.registerTask('test', ['localtest', 'browsertest', 'docs']);
+  grunt.registerTask('default', ['test', 'dist', 'docs']);
 };
