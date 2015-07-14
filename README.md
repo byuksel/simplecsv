@@ -11,8 +11,8 @@ SimpleCSV.js is a fast and compact JavaScript CSV library for parsing csv string
 
 ## Downloads ##
 
-* [Version 0.0.43, minimized, 4.4K : http://simplecsvjs.com/dist/simplecsv.0.0.43.standalone.min.js](http://simplecsvjs.com/dist/simplecsv.0.0.43.standalone.min.js)
-* [Version 0.0.43, un-minimized, 13K : http://simplecsvjs.com/dist/simplecsv.0.0.43.standalone.js](http://simplecsvjs.com/dist/simplecsv.0.0.43.standalone.js)
+* [Version 0.0.44, minimized, 4.4K : http://simplecsvjs.com/dist/simplecsv.0.0.44.standalone.min.js](http://simplecsvjs.com/dist/simplecsv.0.0.44.standalone.min.js)
+* [Version 0.0.44, un-minimized, 13K : http://simplecsvjs.com/dist/simplecsv.0.0.44.standalone.js](http://simplecsvjs.com/dist/simplecsv.0.0.44.standalone.js)
 
 ## Examples ##
 
@@ -20,7 +20,7 @@ SimpleCSV.js is a fast and compact JavaScript CSV library for parsing csv string
 
 In any web page:
 ```html
-<script src="http://simplecsvjs.com/dist/simplecsv.0.0.43.standalone.min.js"></script>
+<script src="http://simplecsvjs.com/dist/simplecsv.0.0.44.standalone.min.js"></script>
 <script>
   var simplecsv = require('simplecsv');
   var csv = new simplecsv.csv();
@@ -120,4 +120,4 @@ For bug reports, feature requests and general questions, please feel free to ema
 [Refer to development notes](/CONTRIBUTING.md)
 
 # Documentation #
-[Lib manual](/docs/index.html)
+[Library manual](https://cdn.rawgit.com/byuksel/simplecsv/master/docs/index.html)
