@@ -120,4 +120,4 @@ For bug reports, feature requests and general questions, please feel free to ema
 [Refer to development notes](/CONTRIBUTING.md)
 
 # Documentation #
-[Library manual](/MANUAL.md)
+[Lib manual](/docs/index.html)
