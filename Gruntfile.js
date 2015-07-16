@@ -30,6 +30,7 @@ module.exports = function(grunt) {
         src: ['lib/*.js', 'test/*.js', 'simplecsv.js'],
         jsdoc: 'node_modules/.bin/jsdoc',
         options: {
+          readme: './README.md',
           destination: 'docs',
           configure: './jsdoc.conf'
         }
