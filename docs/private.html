@@ -48,6 +48,10 @@
 
 
 
+<div class="description">
+    <p>Constructs a new private class.</p>
+</div>
+
 
 
 
@@ -89,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_private.js.html">lib/private.js</a>, <a href="lib_private.js.html#line12">line 12</a>
+        <a href="lib_private.js.html">lib/private.js</a>, <a href="lib_private.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -138,20 +142,21 @@
 
     
 
-    <h4 class="name" id=".doubleQuoteIfNecessary"><span class="type-signature">(static) </span>doubleQuoteIfNecessary<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".doubleQuoteIfNecessary"><span class="type-signature">(static) </span>doubleQuoteIfNecessary<span class="signature">(input)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Double-quotes the fields according the rules on Wikipedia as of 6/2015.
-(https://en.wikipedia.org/wiki/Comma-separated_values)
-
-* Fields with embedded commas or double-quote characters must be quoted.
-* Each of the embedded double-quote characters must be represented by a pair of double-quote characters.
-* Fields with embedded line breaks must be quoted.
-* (Python addition) Python quotes \r always.
+    <p>Double-quotes the fields according the rules on Wikipedia as of 6/2015.
+(<a href="https://en.wikipedia.org/wiki/Comma-separated_values">https://en.wikipedia.org/wiki/Comma-separated_values</a>)</p>
+<ul>
+<li>Fields with embedded commas or double-quote characters must be quoted.</li>
+<li>Each of the embedded double-quote characters must be represented by a pair of double-quote characters.</li>
+<li>Fields with embedded line breaks must be quoted.</li>
+<li>(Python addition) Python csv parser double-quotes <code>\r</code> always.</li>
+</ul>
 </div>
 
 
@@ -160,6 +165,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>input</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Input to double quote if necessary.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -195,7 +249,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_private.js.html">lib/private.js</a>, <a href="lib_private.js.html#line23">line 23</a>
+        <a href="lib_private.js.html">lib/private.js</a>, <a href="lib_private.js.html#line25">line 25</a>
     </li></ul></dd>
     
 
@@ -226,16 +280,16 @@
 
     
 
-    <h4 class="name" id=".getArg"><span class="type-signature">(static) </span>getArg<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getArg"><span class="type-signature">(static) </span>getArg<span class="signature">(argDic, argName, defVal)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Get the argument from the argument dictionary, with a default value.
+    <p>Get the argument from the argument dictionary, with a default value.
 Default value (defval) is returned if the argument is not in the argument:value
-dictionary, or, if the argument's type is not the same as default value.
+dictionary, or, if the argument's type is not the same as default value.</p>
 </div>
 
 
@@ -244,6 +298,101 @@ dictionary, or, if the argument's type is not the same as default value.
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>argDic</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">dictionary</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A dictionary of the type argName: value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>argName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The name of the argument to be found in dictionary</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>defVal</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>If it cannot find this argName in argDic, it returns defVal.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -279,7 +428,7 @@ dictionary, or, if the argument's type is not the same as default value.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_private.js.html">lib/private.js</a>, <a href="lib_private.js.html#line47">line 47</a>
+        <a href="lib_private.js.html">lib/private.js</a>, <a href="lib_private.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -310,25 +459,18 @@ dictionary, or, if the argument's type is not the same as default value.
 
     
 
-    <h4 class="name" id=".parseStringToArray"><span class="type-signature">(static) </span>parseStringToArray<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".parseStringToArray"><span class="type-signature">(static) </span>parseStringToArray<span class="signature">(argdic, str)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Given a str, it parses it into array.
-Seperator is always ,
-Follows http://tools.ietf.org/html/rfc4180
-as in: "Fields containing line breaks (CRLF), double quotes, and commas
-should be enclosed in double-quotes."
-params is a dictionary of possible parameters. The tuples in the dictionary
-should be string pairs.
-hasHeaders: true/false
-            if true,
-delim: one char [default:',']
-hasComments: true/false [default:false]
-if true, any row which starts with '#' will be skipped.
+    <p>Given a csv string, it parses it into double array.
+Delimiter can be changed with argdic's delim parameter.</p>
+<p>Follows the csv format described in <a href="http://tools.ietf.org/html/rfc4180">http://tools.ietf.org/html/rfc4180</a>
+as in: <em>&quot;Fields containing line breaks (CRLF), double quotes, and commas
+should be enclosed in double-quotes.&quot;</em></p>
 </div>
 
 
@@ -337,6 +479,85 @@ if true, any row which starts with '#' will be skipped.
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>argdic</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">dictionary</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A dictionary of possible parameters.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>str</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>csv string to be parsed.
+Recognized values are:</p>
+<ul>
+<li><code>hasHeaders</code>: boolean - Whether str has header column. <em>[default: false]</em></li>
+<li><code>delim</code>: char - Single delimiter char <em>[default: ',']</em></li>
+<li><code>hasComments</code>: boolean - Whether str has comments. If true, any row which
+ starts with <code>#</code> will be skipped. <em>[default: false]</em></li>
+</ul></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -372,7 +593,7 @@ if true, any row which starts with '#' will be skipped.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_private.js.html">lib/private.js</a>, <a href="lib_private.js.html#line67">line 67</a>
+        <a href="lib_private.js.html">lib/private.js</a>, <a href="lib_private.js.html#line73">line 73</a>
     </li></ul></dd>
     
 
@@ -414,13 +635,13 @@ if true, any row which starts with '#' will be skipped.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="csv.html">csv</a></li><li><a href="csvdata.html">csvdata</a></li><li><a href="private.html">private</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-simplecsv.html">simplecsv</a></li></ul><h3>Classes</h3><ul><li><a href="csv.html">csv</a></li><li><a href="csvdata.html">csvdata</a></li><li><a href="private.html">private</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Tue Jul 14 2015 02:09:59 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Thu Jul 16 2015 00:43:45 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>
