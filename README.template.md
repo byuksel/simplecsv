@@ -117,7 +117,7 @@ SimpleCSV.js uses `\n` and `\r\n` for newline when parsing. Currently there is n
 For bug reports, feature requests and general questions, please feel free to email baris@onehundredyearsofcode.com.
 
 # Development #
-[Refer to development notes](/CONTRIBUTING.md)
+[Refer to development notes](https://github.com/byuksel/simplecsv/blob/master/CONTRIBUTING.md)
 
 # Documentation #
 [Library manual](https://cdn.rawgit.com/byuksel/simplecsv/master/docs/index.html)

@@ -11,8 +11,8 @@ SimpleCSV.js is a fast and compact JavaScript CSV library for parsing csv string
 
 ## Downloads ##
 
-* [Version 0.0.46, minimized, 4.4K : http://simplecsvjs.com/dist/simplecsv.0.0.46.standalone.min.js](http://simplecsvjs.com/dist/simplecsv.0.0.46.standalone.min.js)
-* [Version 0.0.46, un-minimized, 13K : http://simplecsvjs.com/dist/simplecsv.0.0.46.standalone.js](http://simplecsvjs.com/dist/simplecsv.0.0.46.standalone.js)
+* [Version 0.0.47, minimized, 4.4K : http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.min.js](http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.min.js)
+* [Version 0.0.47, un-minimized, 13K : http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.js](http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.js)
 
 ## Examples ##
 
@@ -20,7 +20,7 @@ SimpleCSV.js is a fast and compact JavaScript CSV library for parsing csv string
 
 In any web page:
 ```html
-<script src="http://simplecsvjs.com/dist/simplecsv.0.0.46.standalone.min.js"></script>
+<script src="http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.min.js"></script>
 <script>
   var simplecsv = require('simplecsv');
   var csv = new simplecsv.csv();
@@ -117,7 +117,7 @@ SimpleCSV.js uses `\n` and `\r\n` for newline when parsing. Currently there is n
 For bug reports, feature requests and general questions, please feel free to email baris@onehundredyearsofcode.com.
 
 # Development #
-[Refer to development notes](/CONTRIBUTING.md)
+[Refer to development notes](https://github.com/byuksel/simplecsv/blob/master/CONTRIBUTING.md)
 
 # Documentation #
 [Library manual](https://cdn.rawgit.com/byuksel/simplecsv/master/docs/index.html)

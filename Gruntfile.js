@@ -25,6 +25,18 @@ module.exports = function(grunt) {
         ]
       }
     },
+    markdown: {
+      all: {
+        files: [
+          {
+            expand: true,
+            src: 'README.md',
+            dest: './',
+            ext: '.md.html'
+          }
+        ]
+      }
+    },
     jsdoc: {
       all: {
         src: ['lib/*.js', 'test/*.js', 'simplecsv.js'],
@@ -64,7 +76,7 @@ module.exports = function(grunt) {
       tests: ['./browser/test/browserified_tests.js',
               './test/output/**/*',
               './README.md'],
-      docs: [ './README.md', './docs/**/*']
+      docs: [ './README.md', './README.md.html', './docs/**/*']
     },
     // Parse AST for require() and build the browser code.
     browserify: {
@@ -124,6 +136,7 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-markdown');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -133,7 +146,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.registerTask('docs', ['clean:docs', 'replace', 'jsdoc']);
+  grunt.registerTask('docs', ['clean:docs', 'replace', 'markdown', 'jsdoc']);
   grunt.registerTask('dist', ['clean:dist', 'browserify', 'uglify']);
   grunt.registerTask('localtest', ['clean:tests', 'jshint', 'mochaTest']);
   grunt.registerTask('browsertest', ['clean:tests', 'jshint', 'browserify', 'connect:server', 'mocha_phantomjs']);
