@@ -1,0 +1,202 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <p><a href="/"><img src="http://simplecsvjs.com/simplecsv.png" alt="SimpleCSV.js Logo"></a></p>
+<p>SimpleCSV.js is a fast and compact JavaScript CSV library for parsing csv strings, and parsing JSON table objects.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>In-the-Browser, For-The-Browser:</strong> Only 3 lines of code to parse CSV strings, and JSON tables.</li>
+<li><strong>Python csv compatible:</strong> Guaranteed to produce the same results as Python 2.7 csv parser.</li>
+<li><strong>JSON parser:</strong> Convert CSV to JSON, or JSON to CSV.</li>
+<li><strong>No dependancies:</strong> Tiny standalone .js file.</li>
+</ul>
+<h2 id="downloads">Downloads</h2>
+<ul>
+<li><a href="http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.min.js">Version 0.0.47, minimized, 4.4K : http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.min.js</a></li>
+<li><a href="http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.js">Version 0.0.47, un-minimized, 13K : http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.js</a></li>
+</ul>
+<h2 id="examples">Examples</h2>
+<h3 id="browser">Browser</h3>
+<p>In any web page:</p>
+<pre><code class="lang-html">&lt;script src=&quot;http://simplecsvjs.com/dist/simplecsv.0.0.47.standalone.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  var simplecsv = require(&#39;simplecsv&#39;);
+  var csv = new simplecsv.csv();
+
+  var parsedCsvdata = csv.parseString(&#39;Turing, 35, chess\nSamuel, 21, checkers&#39;);
+&lt;/script&gt;
+</code></pre>
+<h3 id="node-js">Node.js</h3>
+<pre><code class="lang-js">var simplecsv = require(&#39;simplecsv&#39;);
+var csv = new simplecsv.csv();
+
+var parsedCsvdata = csv.parseString(&#39;Turing, 35, chess\nSamuel, 21, checkers&#39;);
+</code></pre>
+<h2 id="more-examples">More Examples</h2>
+<h3 id="csv-to-json">CSV to JSON</h3>
+<pre><code class="lang-js">var simplecsv = require(&#39;simplecsv&#39;);
+var csv = new simplecsv.csv();
+
+var jsonObj = csv.CSVToJSON(&#39;Planet Name, Color\nMars,red-orange\nUranus,light-blue&#39;,
+                            { hasHeaders: true });
+console.log(jsonObj);
+</code></pre>
+<p>output is:</p>
+<pre><code class="lang-json">[{&quot;Planet Name&quot;:&quot;Mars&quot;,&quot; Color&quot;:&quot;red-orange&quot;},{&quot;Planet Name&quot;:&quot;Uranus&quot;,&quot; Color&quot;:&quot;light-blue&quot;}]
+</code></pre>
+<h3 id="json-csv">JSON -&gt; CSV</h3>
+<pre><code class="lang-js">var simplecsv = require(&#39;simplecsv&#39;);
+var csv = new simplecsv.csv();
+
+var str  = csv.JSONToCSV(&#39;[{&quot;Planet Name&quot;:&quot;Mars&quot;,&quot; Color&quot;:&quot;red-orange&quot;},&#39; +
+                         &#39;{&quot;Planet Name&quot;:&quot;Uranus&quot;,&quot; Color&quot;:&quot;light-blue&quot;}]&#39;);
+console.log(str);
+</code></pre>
+<p>output is:</p>
+<pre><code>Planet Name, Color
+Mars,red-orange
+Uranus,light-blue
+</code></pre><h3 id="console-log-every-cell">console.log() every cell</h3>
+<pre><code class="lang-js">var simplecsv = require(&#39;simplecsv&#39;);
+var csv = new simplecsv.csv();
+
+var cdata = csv.parseString(&#39;Planet Name, Color\nMars,red-orange\nUranus,light-blue&#39;, { hasHeaders: true });
+for (var i = 0; i &lt; cdata.rowCount; i++) {
+  for (var j = 0; j &lt; cdata.columnCount; j++) {
+    console.log(cdata.rows[i][j]);
+  }
+}
+</code></pre>
+<h3 id="find-errors">find errors</h3>
+<pre><code class="lang-js">var simplecsv = require(&#39;simplecsv&#39;);
+var csv = new simplecsv.csv();
+
+var cdata = csv.parseString(&#39;Planet Name, Color\nMars\nred-orange, Uranus,light-blue&#39;, { hasHeaders: true });
+console.log(csv.findErrors(cdata));
+</code></pre>
+<h1 id="quick-start">Quick Start</h1>
+<h1 id="install">Install</h1>
+<p>Install with <a href="https://www.npmjs.com/">npm</a>.</p>
+<pre><code>$ npm install simplecsv
+</code></pre><h1 id="newline">Newline</h1>
+<p>SimpleCSV.js uses <code>\n</code> and <code>\r\n</code> for newline when parsing. Currently there is no support for Mac&#39;s <code>\r</code> for newline (i.e. universal mode in Python csv).</p>
+<h1 id="support">Support</h1>
+<p>For bug reports, feature requests and general questions, please feel free to email baris@onehundredyearsofcode.com.</p>
+<h1 id="development">Development</h1>
+<p><a href="https://github.com/byuksel/simplecsv/blob/master/CONTRIBUTING.md">Refer to development notes</a></p>
+<h1 id="documentation">Documentation</h1>
+<p><a href="https://cdn.rawgit.com/byuksel/simplecsv/master/docs/index.html">Library manual</a></p>
+
+  </body>
+</html>
