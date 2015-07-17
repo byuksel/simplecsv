@@ -1,9 +1,0 @@
----
-layout: post
-title:  "Welcome to Simple CSV . JS"
-date:   2015-06-08 21:45:16
-categories: simplecsv
----
-
-Simple CSV.js is a simple csv parsing library that does all the tricks for your JS applications. 
-
