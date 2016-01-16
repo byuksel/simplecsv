@@ -2,6 +2,7 @@
   "name": "simplecsv",
   "version": "0.0.47",
   "description": "Fast and compact CSV parser for parsing CSV with CSV to JSON support.",
+  "main": "simplecsv.js",
   "keywords": [
     "csv",
     "csvparser",
